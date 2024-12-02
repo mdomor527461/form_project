@@ -6,17 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\CustomerInformation;
 use App\Models\BottlingDetails;
 use Illuminate\Support\Facades\Log;
+use PhpParser\Node\Expr\Cast\Array_;
 
 class FormController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('form.index');
     }
     public function store(Request $request)
     {
-
-
-        // Step 1: Validate the incoming request
+        // // Step 1: Validate the incoming request
         $validatedData = $request->validate([
             //     // Customer Information
             'winery' => 'required|string|max:255',
@@ -53,8 +53,7 @@ class FormController extends Controller
             //     'bottling_details.*.cartoon' => 'nullable|string|max:255',
         ]);
 
-        // print_r($validatedData['bottling_details']);
-
+        $customer_information = [];
         // // Step 2: Save Customer Information
         $customer = new CustomerInformation();
         $customer->winery = $validatedData['winery'];
@@ -69,41 +68,105 @@ class FormController extends Controller
         $customer->special_requirements = $validatedData['special_requirements'] ?? null;
         $customer->save();
 
-        $bottling_details = $request->bottling_details;
-        // // Step 3: Save Bottling Details
-        print_r($bottling_details);
-        foreach ($bottling_details as $detail) {
-            if (isset($detail['service'])) { // Check if the 'service' key exists
-                BottlingDetails::create([
-                    'customer_id' => $customer->id,
-                    'service' => $detail['service'] ?? 'FillLabelBack', // Default service value
-                    'brand_name' => $detail['brand_name'] ?? null,
-                    'year' => $detail['year'] ?? null,
-                    'variety' => $detail['variety'] ?? null,
-                    'volume' => $detail['volume'] ?? null,
-                    'tank' => $detail['tank'] ?? null,
-                    'pre_bottling_filtration' => $detail['pre_bottling_filtration'] ?? null,
-                    'filtration_bottling' => $detail['filtration_bottling'] ?? null,
-                    'gas_protection' => $detail['gas_protection'] ?? null,
-                    'bottle_type' => $detail['bottle_type'] ?? null,
-                    'manufacturer_code' => $detail['manufacturer_code'] ?? null,
-                    'bottle_color' => $detail['bottle_color'] ?? null,
-                    'bottle_size' => $detail['bottle_size'] ?? null,
-                    'closure_type' => $detail['closure_type'] ?? null,
-                    'labelling' => $detail['labelling'] ?? null,
-                    'label_height' => $detail['label_height'] ?? null,
-                    'sample_bottle' => $detail['sample_bottle'] ?? null,
-                    'packing_requirements' => $detail['packing_requirements'] ?? null,
-                    'cartoon' => $detail['cartoon'] ?? null,
-                ]);
-            } else {
-                // Handle the case where 'service' key is missing
-                // You can log it, skip it, or provide a default value
-                Log::warning('Service key missing in bottling details', $detail);
-            }
-        }
 
-        // // Step 4: Redirect back with a success message
-        return redirect()->back()->with('store_success', 'Form submitted successfully!');
+        $bottling_details = $request->input('bottling_details'); // Get 'bottling_details'
+        // Log the data to debug
+        // Log::info('Bottling Details:', $bottling_details);
+
+        // Print the data (for local debugging)
+        // dd($bottling_details);
+        if (!is_array($bottling_details)) {
+            return back()->withErrors(['bottling_details' => 'Invalid bottling details submitted']);
+        }
+        $details = [];
+        // print_r($details);
+        for ($i = 1; $i <= count($bottling_details); $i++) {
+            $details = []; // Reset $details at the start of each iteration
+            // Add customer ID to the details array
+            if ($i == 1) {
+                $service = $bottling_details[$i]['service'];
+                continue;
+            }
+            // array_push($details,$customer->id);
+            // print_r($details);
+            foreach ($bottling_details[$i] as $single_detail) {
+                array_push($details, $single_detail);
+                // echo "$single_detail<br>";
+                // echo " $single_detail "; // Add each detail to the $details array
+            }
+
+            // Optionally, remove the first element (if necessary)
+
+
+            print_r($details);
+            // echo $details[5];
+            if($service == "FillLabelPack"){
+            BottlingDetails::create([
+                'customer_id' => $customer->id, // Replace with actual customer ID
+                'service' => $service,
+                'brand_name' => $details[0],
+                'year' => $details[1],
+                'variety' => $details[2],
+                'volume' => $details[3],
+                'tank' => $details[4],
+                'pre_bottling_filtration' => $details[5],
+                'filtration_bottling' => $details[6],
+                'gas_protection' => $details[7],
+                'bottle_type' => $details[8],
+                'manufacturer_code' => $details[9],
+                'bottle_color' => $details[10],
+                'bottle_size' => $details[11],
+                'closure_type' => $details[12],
+                'labelling' => $details[13],
+                'label_height' => $details[14],
+                'sample_bottle' => $details[15],
+                'packing_requirements' => $details[16],
+                'cartoon' => $details[17],
+
+            ]);
+        }
+        else if($service == "FillPack"){
+            BottlingDetails::create([
+                'customer_id' => $customer->id, // Replace with actual customer ID
+                'service' => $service,
+                'brand_name' => $details[0],
+                'year' => $details[1],
+                'variety' => $details[2],
+                'volume' => $details[3],
+                'tank' => $details[4],
+                'pre_bottling_filtration' => $details[5],
+                'filtration_bottling' => $details[6],
+                'gas_protection' => $details[7],
+                'bottle_type' => $details[8],
+                'manufacturer_code' => $details[9],
+                'bottle_color' => $details[10],
+                'bottle_size' => $details[11],
+                'closure_type' => $details[12],
+                'packing_requirements' => $details[13],
+                'cartoon' => $details[14],
+            ]);
+        }
+        else if($service == "LabelPack"){
+            BottlingDetails::create([
+                'customer_id' => $customer->id, // Replace with actual customer ID
+                'service' => $service,
+                'brand_name' => $details[0],
+                'year' => $details[1],
+                'variety' => $details[2],
+                'volume' => $details[3],
+                'bottle_type' => $details[4],
+                'bottle_size' => $details[5],
+                'labelling' => $details[6],
+                'label_height' => $details[7],
+                'sample_bottle' => $details[8],
+                'packing_requirements' => $details[9],
+                'cartoon' => $details[10],
+            ]);
+        }
+            // Print the current $details array
+            // Clear $details for the next iteration
+            // This step is redundant here since $details is reset at the beginning of the loop
+        }
+        return back()->with('store_success','form submitted successfully');
     }
 }
