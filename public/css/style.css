@@ -1,0 +1,101 @@
+body {
+    font-family: Arial, sans-serif;
+     /* Path to your image */
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents repeating the image */
+    background-position: center center; /* Centers the image */
+    margin: 0;
+    padding: 20px;
+}
+
+
+.form-container {
+    background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+    padding: 30px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    width: 80%;
+    margin: 20px auto; /* Center the form */
+}
+
+
+.section-title {
+    font-size: 1.5rem;
+    color: #800000;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.section-container {
+    padding: 30px; /* Increased padding */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    background-color: #fafafa;
+}
+
+.form-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color: #333;
+}
+
+.form-control, .form-select {
+    padding: 15px; /* Increased padding for fields */
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    margin-bottom: 20px; /* Increased margin */
+    width: 100%;
+}
+
+textarea.form-control {
+    resize: none;
+}
+
+.btn {
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn-add {
+    background-color: #f0f0f0;
+    color: #800000;
+    border: 1px solid #800000;
+    margin-top: 20px; /* Added margin for separation */
+}
+
+.btn-add:hover {
+    background-color: #800000;
+    color: white;
+}
+
+.btn-submit {
+    background-color: #c24b23;
+    color: white;
+    border: none;
+    margin-top: 30px; /* Increased margin for spacing */
+}
+
+.btn-submit:hover {
+    background-color: #cd4b20;
+    color: white;
+}
+
+.text-danger {
+    font-size: 0.85rem;
+    color: #f36512;
+}
+
+h3 {
+    margin-top: 20px;
+}
+
+input[type="date"] {
+    font-size: 1rem;
+    padding: 10px;
+}
