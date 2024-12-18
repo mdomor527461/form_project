@@ -35,26 +35,28 @@ class FormController extends Controller
         $customer->save();
 
         $bottling_details = $request->input('bottling_details');
+        // print_r($bottling_details);
         if (!is_array($bottling_details)) {
             return back()->withErrors(['bottling_details' => 'Invalid bottling details submitted']);
         }
         // print_r($bottling_details);
-
+        // $details = [];
         for ($i = 1; $i <= count($bottling_details); $i++) {
             $details = [];
             if ($i == 1) {
                 $service = $bottling_details[$i]['service'];
-                echo $bottling_details[$i]['service'];
+                // echo $bottling_details[$i]['service']." ";
                 continue;
             }
             else{
-               if(count($bottling_details[$i]) ==19){
+               if(count($bottling_details[$i]) ==18 || count($bottling_details[$i]) ==19){
+
                 $service = "FillLabelPack";
                }
-               else if(count($bottling_details[$i]) ==16){
+               else if(count($bottling_details[$i]) ==16 || count($bottling_details[$i]) == 15){
                      $service = "FillPack";
                }
-               else if(count($bottling_details[$i]) ==11){
+               else if(count($bottling_details[$i]) ==12 || count($bottling_details[$i]) == 11){
                     $service = "LabelPack";
                }
             }
@@ -62,8 +64,8 @@ class FormController extends Controller
             foreach ($bottling_details[$i] as $single_detail) {
                 array_push($details, $single_detail);
             }
-
-
+            // echo count($bottling_details[$i])." ";
+            // echo $service." ";
             if($service == "FillLabelPack"){
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
@@ -134,14 +136,12 @@ class FormController extends Controller
 
         // Retrieve saved bottling details for the customer
         $bottlingDetails = BottlingDetails::where('customer_id', $customer->id)->get();
-
-        // Generate PDF
         $pdf = Pdf::loadView('pdf.customer_bottling_details', [
             'customer' => $customer,
             'bottling_details' => $bottlingDetails,
-        ]);
+        ])->setPaper('a4', 'landscape'); // Set the paper size to A4 and orientation to landscape
 
-        // Return the generated PDF
-        return $pdf->download('customer_bottling_details.pdf');
+        // Return the generated PDF for download
+        return $pdf->download('customer_bottling_details_landscape.pdf');
     }
 }

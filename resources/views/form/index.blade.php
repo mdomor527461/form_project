@@ -9,15 +9,15 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
-<body style="background-image:url('{{ asset('img/background_image/background.webp') }}')">
-    <div class="container mt-4 mb-4">
-        <div class="text-center text-light">
-            <h1 class="form-title mt-5 mb-5">MWP Booking Form</h1>
-        </div>
-        <form class="form-container mt-4" action="{{ route('form.store') }}" method="POST">
+<body style="background-color:antiquewhite;">
+    <div class="mb-4">
+        {{-- <div class="text-center">
+            <h1 class="mt-5 mb-5">MWP Booking Form</h1>
+        </div> --}}
+        <form action="{{ route('form.store') }}" method="POST" style="background-color: white;padding:20px">
             @csrf
             <!-- Customer Information -->
-            <h3 class="section-title">Customer Information</h3>
+            <h3>Booking Form</h3>
             <div class="section-container">
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -81,7 +81,7 @@
                 <div class="col-md-12">
                     <label for="special-requirements" class="form-label">Special Requirements</label>
                     <textarea id="special-requirements" name="special_requirements" class="form-control" rows="3"
-                        placeholder="Mention any relevant information, e.g., protocols, filtering, etc."></textarea>
+                        placeholder="Mention any relevant information, e.g., protocols, filtering, etc." style="height: 65px;"></textarea>
                 </div>
             </div>
 
