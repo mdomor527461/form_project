@@ -3,6 +3,8 @@
 
 <head>
     <title>Customer and Bottling Details</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-TN3vx1B5bFPz3XiSG5iWrFub8BRsgvw3PQXQ0aTfEIt1RxI5N/V8Mz70nwdEn5oz" crossorigin="anonymous">
     <style>
         body {
             background-color: white;
@@ -32,6 +34,7 @@
         }
 
         h1,
+        h3,
         h6,
         h5 {
             text-align: center;
@@ -49,8 +52,8 @@
         /* Smaller font for tables */
         .bottling-details-table th,
         .bottling-details-table td {
-            font-size: 8px;
-            line-height: 1.2;
+            font-size: 12px;
+            line-height: 0.8;
         }
     </style>
 </head>
@@ -61,36 +64,53 @@
 
     <!-- Bottling Details Section -->
     {{-- <div class="page-break"></div> --}}
-
+    {{-- <h3>Mobline Wine Proccessing Form</h3> --}}
     @php $wineNumber = 1; @endphp
     @foreach ($bottling_details->chunk(5) as $chunkIndex => $bottlingChunk)
-        <div>
-            <h5 class="text-center">Customer Information</h5>
-            <table>
-                <tr>
-                    <th>Winery Name:</th>
-                    <td>{{ $customer->winery }}</td>
-                    <th>Bottling Address:</th>
-                    <td>{{ $customer->bottling_address }}</td>
-                </tr>
-                <tr>
-                    <th>Bottling Date:</th>
-                    <td>{{ $customer->bottling_date }}</td>
-                    <th>Contact Name:</th>
-                    <td>{{ $customer->contact_person }}</td>
-                </tr>
-                <tr>
-                    <th>Email:</th>
-                    <td>{{ $customer->email }}</td>
-                    <th>Phone:</th>
-                    <td>{{ $customer->contact_phone }}</td>
-                </tr>
-                <tr>
-                    <th>Power Supplied:</th>
-                    <td colspan="3">{{ $customer->power }}</td>
-                </tr>
-            </table>
+        <div style="width: 100%; display: table;">
+
+            <!-- Left Section: MWP Content -->
+            <div
+                style="display: table-cell; width: 25%; vertical-align: top; border: 1px solid black; padding: 10px; text-align: center;">
+                <h1 style="color: red; margin: 0;font-size:60px;">M<span style="color:#00aaff;">WP</span></h1>
+                <p style="margin: 5px 0; font-size: 14px;">Mobile Wine Processing</p>
+                <p style="margin: 0; font-size: 12px; font-style: italic;">The Estate Bottling Specialists</p>
+            </div>
+
+            <!-- Right Section: Customer Information -->
+            <div style="display: table-cell; width: 75%; vertical-align: top; padding: 10px; border: 1px solid black;">
+                <h5>Customer Information</h5>
+                <table style="width: 100%; border-collapse: collapse;" class="bottling-details-table">
+                    <tr>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Winery Name:</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->winery }}</td>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Bottling Date:</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->bottling_date }}</td>
+                    </tr>
+                    <tr>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Bottling Address:</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->bottling_address }}</td>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Contact Name:</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->contact_person }}</td>
+                    </tr>
+                    <tr>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Phone:</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->contact_phone }}</td>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Email:</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->email }}</td>
+                    </tr>
+                    <tr>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Power</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->power }}</td>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Requirements</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->special_requirements }}</td>
+                    </tr>
+                </table>
+            </div>
+
         </div>
+
+
         {{-- <h6>Table {{ $chunkIndex + 1 }}</h6> --}}
         <h5>bottling details</h5>
         <table class="bottling-details-table">
@@ -224,7 +244,9 @@
             <div class="page-break"></div>
         @endif
     @endforeach
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-qj/zlEZOed/1BEcZn3mTeUqSZXu/cz9VDP4hztKCPRZZ2Ik/G/bf5Ner/aVbWj2z" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

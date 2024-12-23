@@ -249,7 +249,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                        <label for="closure-type" class="form-label">Closure Type *</label>
-                                        <select id="closure-type" name="bottling_details[${wineCounter}][closure_type]" class="form-select" required>
+                                        <select id="closure-type" name="bottling_details[${wineCounter}][closure_type]" class="form-select other-option" required>
                                             <option value="">Select Closure Type</option>
                                             <option value="Screwcap-30x60mm">Screwcap - 30x60mm</option>
                                             <option value="Screwcap-31x60mm">Screwcap - 31x60mm</option>
@@ -259,7 +259,9 @@
                                             <option value="Cork-Diam20">Cork - Diam 20</option>
                                             <option value="Cork-Diam30">Cork - Diam 30</option>
                                             <option value="Other">Other</option>
+
                                         </select>
+                                        <div class="other-input-container mt-2"></div>
 
                                     </div>
                                 </div>
@@ -423,7 +425,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-6">
                                        <label for="closure-type" class="form-label">Closure Type *</label>
-                                        <select id="closure-type" name="bottling_details[${wineCounter}][closure_type]" class="form-select" required>
+                                        <select id="closure-type" name="bottling_details[${wineCounter}][closure_type]" class="form-select other-option" required>
                                             <option value="">Select Closure Type</option>
                                             <option value="Screwcap-30x60mm">Screwcap - 30x60mm</option>
                                             <option value="Screwcap-31x60mm">Screwcap - 31x60mm</option>
@@ -433,7 +435,9 @@
                                             <option value="Cork-Diam20">Cork - Diam 20</option>
                                             <option value="Cork-Diam30">Cork - Diam 30</option>
                                             <option value="Other">Other</option>
+
                                         </select>
+                                        <div class="other-input-container mt-2"></div>
 
                                     </div>
                                 </div>
@@ -605,17 +609,49 @@
                     // Clear any existing dynamic input field
                     otherInputContainer.innerHTML = '';
 
-                    // If "Other" is selected, add a text input field
+                    // If "Other" is selected, add a text input field and label
                     if (dropdown.value === 'Other') {
+                        // Find the label of the dropdown field
+                        const dropdownLabel = dropdown.parentNode.querySelector('label');
+
+                        // Create a new label element for the dynamic input field
+                        if (dropdownLabel) {
+                            const newLabel = document.createElement('label');
+                            newLabel.textContent = dropdownLabel.textContent + ' (Other)';
+                            newLabel.className = 'form-label'; // Add Bootstrap class for styling
+                            otherInputContainer.appendChild(newLabel);
+                        }
+
+                        // Create the dynamic input field
                         const inputField = document.createElement('input');
                         inputField.type = 'text';
-                        inputField.name = `${dropdown.id}_other`; // Unique name for the input
+                        inputField.name = `${dropdown.name}_other`; // Unique name for the input
                         inputField.placeholder = 'Please specify';
                         inputField.className = 'form-control mt-2';
                         inputField.required = true; // Make it required
                         otherInputContainer.appendChild(inputField);
+
+                        // Ensure the dropdown value isn't used during form submission
+                        dropdown.setAttribute('data-ignore', 'true'); // Mark to ignore during submission
+                    } else {
+                        dropdown.removeAttribute('data-ignore');
                     }
                 }
+            });
+
+            // Handle form submission
+            document.querySelector('form').addEventListener('submit', function(event) {
+                const dropdowns = document.querySelectorAll('.other-option');
+
+                dropdowns.forEach(function(dropdown) {
+                    // Check if the dropdown has a corresponding "Other" input field
+                    const otherInputContainer = dropdown.parentNode.querySelector(
+                        '.other-input-container input');
+                    if (dropdown.value === 'Other' && otherInputContainer) {
+                        // Update the dropdown value with the dynamic input field's value
+                        dropdown.value = otherInputContainer.value;
+                    }
+                });
             });
         });
     </script>
