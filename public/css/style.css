@@ -43,8 +43,8 @@ body {
 }
 
 .form-control, .form-select {
-    padding: 10px; /* Increased padding for fields */
-    font-size: 1rem;
+    padding: 5px; /* Increased padding for fields */
+    font-size: 15px;
     border: 1px solid #000000;
     margin-bottom: 20px; /* Increased margin */
     width: 100%;
@@ -98,8 +98,8 @@ h3 {
     margin-top: 20px;
 }
 
-input[type="date"] {
-    font-size: 1rem;
-    padding: 10px;
+/* input[type="date"] {
+    font-size: 15px;
+    padding: 5px;
     width: 50%;
-}
+} */
