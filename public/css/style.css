@@ -23,6 +23,7 @@ body {
     font-size: 1.5rem;
     color: black;
     margin-bottom: 15px;
+    /* margin-left:20px; */
     text-transform: uppercase;
     font-weight: bold;
 }
