@@ -207,38 +207,39 @@
                                 </div>
 
                                 <h5 class="section-title">Bottle Details</h5>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label for="bottle-type" class="form-label">Bottle Type *</label>
-                                        <select id="bottle-type" name="bottling_details[${wineCounter}][bottle_type]" class="form-select other-option" required>
-                                            <option value="">Select Bottle Type</option>
-                                            <option value="Riesling">Riesling</option>
-                                            <option value="Punted Burgundy">Punted Burgundy</option>
-                                            <option value="Premium Burgundy">Premium Burgundy</option>
-                                            <option value="Punted Claret">Punted Claret</option>
-                                            <option value="Premium Claret">Premium Claret</option>
-                                            <option value="Super Premium Claret">Super Premium Claret</option>
-                                            <option value="Atlas">Atlas</option>
-                                            <option value="Other">Other (Please specify)</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4 other-input-container" style="display:none"></div>
-                                    <div class="col-md-4" id="man-pre" style="display:block">
-                                        <label for="manufacturer-code" class="form-label">Manufacturer & Item Code</label>
-                                        <input type="text" id="manufacturer-code" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
-                                    </div>
-                                </div>
+                              <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="bottle-type-${wineCounter}" class="form-label">Bottle Type *</label>
+                                <select id="bottle-type-${wineCounter}" name="bottling_details[${wineCounter}][bottle_type]" class="form-select other-option" required>
+                                    <option value="">Select Bottle Type</option>
+                                    <option value="Riesling">Riesling</option>
+                                    <option value="Punted Burgundy">Punted Burgundy</option>
+                                    <option value="Premium Burgundy">Premium Burgundy</option>
+                                    <option value="Punted Claret">Punted Claret</option>
+                                    <option value="Premium Claret">Premium Claret</option>
+                                    <option value="Super Premium Claret">Super Premium Claret</option>
+                                    <option value="Atlas">Atlas</option>
+                                    <option value="Other">Other (Please specify)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 other-input-container" id="other-input-container-${wineCounter}" style="display:none"></div>
+                            <div class="col-md-4" id="man-pre-${wineCounter}" style="display:block">
+                                <label for="manufacturer-code-${wineCounter}" class="form-label">Manufacturer & Item Code</label>
+                                <input type="text" id="manufacturer-code-${wineCounter}" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
+                            </div>
+                        </div>
 
-                                <div class="row mb-3" id="man-aft" style="display:none">
-                                    <div class="col-md-4">
-                                        <label for="manufacturer-code" class="form-label">Manufacturer & Item Code</label>
-                                        <input type="text" id="manufacturer-code" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
-                                    </div>
-                                </div>
+                        <div class="row mb-3" id="man-aft-${wineCounter}" style="display:none">
+                            <div class="col-md-4">
+                                <label for="manufacturer-code-${wineCounter}" class="form-label">Manufacturer & Item Code</label>
+                                <input type="text" id="manufacturer-code-${wineCounter}" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
+                            </div>
+                        </div>
+
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="bottle-color" class="form-label">Bottle Colour</label>
-                                        <select id="bottle-color" name="bottling_details[${wineCounter}][bottle_color]" class="form-select other-option">
+                                        <select id="bottle-color-${wineCounter}" name="bottling_details[${wineCounter}][bottle_color]" class="form-select other-option">
                                             <option value="">Select Bottle Colour</option>
                                             <option value="Flint">Flint</option>
                                             <option value="Antique Green">Antique Green</option>
@@ -248,9 +249,10 @@
                                             <option value="Other">Other (Please specify)</option>
                                         </select>
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-4 other-input-container" style="display:none"></div>
+                                    <div id="bottle-size-prev-${wineCounter}" class="col-md-4" style="display:block">
                                         <label for="bottle-size" class="form-label">Bottle Size *</label>
-                                        <select id="bottle-size" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option" required>
+                                        <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option">
                                             <option value="">Select Bottle Size</option>
                                             <option value="750ml">750ml</option>
                                             <option value="375ml">375ml</option>
@@ -259,6 +261,21 @@
                                     </div>
                                 </div>
 
+                                <div class="row mb-3">
+                                    <div id="bottle-size-next-${wineCounter}" class="col-md-4" style="display:none">
+                                        <label for="bottle-size" class="form-label">Bottle Size *</label>
+                                        <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option">
+                                            <option value="">Select Bottle Size</option>
+                                            <option value="750ml">750ml</option>
+                                            <option value="375ml">375ml</option>
+                                            <option value="Other">Other (Please specify)</option>
+                                        </select>
+                                    </div>
+                                    <div id="size-specify-${wineCounter}" class="col-md-4 other-input-container" style="display:none">
+                                        <label for="bottle_other" class="form-label">Bottle Size (Other)</label>
+                                        <input type="text" name="bottling_details[${wineCounter}][bottle_size]" class="form-control" placeholder="Please specify">
+                                    </div>
+                                </div>
 
                                 <h5 class="section-title">Closure Details</h5>
                                 <div class="row mb-3">
@@ -391,60 +408,77 @@
                                     </div>
                                 </div>
 
+
                                 <h5 class="section-title">Bottle Details</h5>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label for="bottle-type" class="form-label">Bottle Type *</label>
-                                        <select id="bottle-type" name="bottling_details[${wineCounter}][bottle_type]" class="form-select other-option" required>
-                                            <option value="">Select Bottle Type</option>
-                                            <option value="Riesling">Riesling</option>
-                                            <option value="Punted Burgundy">Punted Burgundy</option>
-                                            <option value="Premium Burgundy">Premium Burgundy</option>
-                                            <option value="Punted Claret">Punted Claret</option>
-                                            <option value="Premium Claret">Premium Claret</option>
-                                            <option value="Super Premium Claret">Super Premium Claret</option>
-                                            <option value="Atlas">Atlas</option>
-                                            <option value="Other">Other (Please specify)</option>
-                                        </select>
-                                    </div>
+                              <div class="row mb-3">
+                            <div class="col-md-4">
+                                <label for="bottle-type-${wineCounter}" class="form-label">Bottle Type *</label>
+                                <select id="bottle-type-${wineCounter}" name="bottling_details[${wineCounter}][bottle_type]" class="form-select other-option" required>
+                                    <option value="">Select Bottle Type</option>
+                                    <option value="Riesling">Riesling</option>
+                                    <option value="Punted Burgundy">Punted Burgundy</option>
+                                    <option value="Premium Burgundy">Premium Burgundy</option>
+                                    <option value="Punted Claret">Punted Claret</option>
+                                    <option value="Premium Claret">Premium Claret</option>
+                                    <option value="Super Premium Claret">Super Premium Claret</option>
+                                    <option value="Atlas">Atlas</option>
+                                    <option value="Other">Other (Please specify)</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4 other-input-container" id="other-input-container-${wineCounter}" style="display:none"></div>
+                            <div class="col-md-4" id="man-pre-${wineCounter}" style="display:block">
+                                <label for="manufacturer-code-${wineCounter}" class="form-label">Manufacturer & Item Code</label>
+                                <input type="text" id="manufacturer-code-${wineCounter}" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
+                            </div>
+                        </div>
 
-                                    <div class="col-md-4 other-input-container"></div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4 manufacturer-container">
-                                        <label for="manufacturer-code" class="form-label">Manufacturer & Item Code</label>
-                                        <input type="text" id="manufacturer-code" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label for="bottle-color" class="form-label">Bottle Colour</label>
-                                        <select id="bottle-color" name="bottling_details[${wineCounter}][bottle_color]" class="form-select other-option">
-                                            <option value="">Select Bottle Colour</option>
-                                            <option value="Flint">Flint</option>
-                                            <option value="Antique Green">Antique Green</option>
-                                            <option value="French Green">French Green</option>
-                                            <option value="Amber">Amber</option>
-                                            <option value="Arctic Blue">Arctic Blue</option>
-                                            <option value="Other">Other (Please specify)</option>
-                                        </select>
+                        <div class="row mb-3" id="man-aft-${wineCounter}" style="display:none">
+                            <div class="col-md-4">
+                                <label for="manufacturer-code-${wineCounter}" class="form-label">Manufacturer & Item Code</label>
+                                <input type="text" id="manufacturer-code-${wineCounter}" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
+                            </div>
+                        </div>
 
-                                    </div>
-                                    <div class="other-input-container col-md-4"></div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="bottle-color" class="form-label">Bottle Colour</label>
+                                    <select id="bottle-color-${wineCounter}" name="bottling_details[${wineCounter}][bottle_color]" class="form-select other-option">
+                                        <option value="">Select Bottle Colour</option>
+                                        <option value="Flint">Flint</option>
+                                        <option value="Antique Green">Antique Green</option>
+                                        <option value="French Green">French Green</option>
+                                        <option value="Amber">Amber</option>
+                                        <option value="Arctic Blue">Arctic Blue</option>
+                                        <option value="Other">Other (Please specify)</option>
+                                    </select>
                                 </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4">
-                                        <label for="bottle-size" class="form-label">Bottle Size *</label>
-                                        <select id="bottle-size" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option" required>
-                                            <option value="">Select Bottle Size</option>
-                                            <option value="750ml">750ml</option>
-                                            <option value="375ml">375ml</option>
-                                            <option value="Other">Other (Please specify)</option>
-                                        </select>
+                                <div class="col-md-4 other-input-container" style="display:none"></div>
+                                <div id="bottle-size-prev-${wineCounter}" class="col-md-4" style="display:block">
+                                    <label for="bottle-size" class="form-label">Bottle Size *</label>
+                                    <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option">
+                                        <option value="">Select Bottle Size</option>
+                                        <option value="750ml">750ml</option>
+                                        <option value="375ml">375ml</option>
+                                        <option value="Other">Other (Please specify)</option>
+                                    </select>
+                                </div>
+                            </div>
 
-                                    </div>
-                                    <div class="other-input-container col-md-4"></div>
+                            <div class="row mb-3">
+                                <div id="bottle-size-next-${wineCounter}" class="col-md-4" style="display:none">
+                                    <label for="bottle-size" class="form-label">Bottle Size *</label>
+                                    <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option">
+                                        <option value="">Select Bottle Size</option>
+                                        <option value="750ml">750ml</option>
+                                        <option value="375ml">375ml</option>
+                                        <option value="Other">Other (Please specify)</option>
+                                    </select>
                                 </div>
+                                <div id="size-specify-${wineCounter}" class="col-md-4 other-input-container" style="display:none">
+                                    <label for="bottle_other" class="form-label">Bottle Size (Other)</label>
+                                    <input type="text" name="bottling_details[${wineCounter}][bottle_size]" class="form-control" placeholder="Please specify">
+                                </div>
+                            </div>
 
                                 <h5 class="section-title">Closure Details</h5>
                                 <div class="row mb-3">
@@ -533,18 +567,7 @@
                                 </div>
                                 <div class="other-input-container col-md-4"></div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-md-4">
-                                <label for="bottle-size" class="form-label">Bottle Size *</label>
-                                <select id="bottle-size" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option" required>
-                                    <option value="">Select Bottle Size</option>
-                                    <option value="750ml">750ml</option>
-                                    <option value="375ml">375ml</option>
-                                    <option value="Other">Other (please specify)</option>
-                                </select>
-                                </div>
-                                <div class="other-input-container col-md-4"></div>
-                        </div>
+
 
                         <h5 class="section-title">Labelling Details</h5>
                         <div class="row mb-3">
@@ -629,11 +652,15 @@
                     const dropdown = event.target;
                     // Get the current row, other-input-container, and dynamic row
                     const row = dropdown.closest('.row');
+                    const wineIndex = dropdown.name.match(/\[(\d+)\]/)[1];
                     const otherInputContainer = row.querySelector('.other-input-container');
-                    const manPrev = document.getElementById('man-pre');
-                    const manAfter = document.getElementById('man-aft');
+                    const manPrev = document.getElementById(`man-pre-${wineIndex}`);
+                    const manAfter = document.getElementById(`man-aft-${wineIndex}`);
+                    const bottleSizePrev = document.getElementById(`bottle-size-prev-${wineIndex}`);
+                    const bottleSizeNext = document.getElementById(`bottle-size-next-${wineIndex}`);
+                    const sizeSpecify = document.getElementById(`size-specify-${wineIndex}`);
                     // If "Other" is selected bottle type and manufacturer
-                    if (dropdown.id === 'bottle-type' && dropdown.value === 'Other') {
+                    if (dropdown.id === `bottle-type-${wineIndex}` && dropdown.value === 'Other') {
                         otherInputContainer.style.display = 'block';
                         manPrev.style.display = 'none';
                         manAfter.style.display = 'block';
@@ -646,11 +673,39 @@
                         <label for="${dropdown.name}_other" class="form-label">${labelText} (Other)</label>
                         <input type="text" name="${dropdown.name}_other" class="form-control" placeholder="Please specify" required>
                     `;
-                    } else if (dropdown.id === 'bottle-type') {
+                    } else if (dropdown.id === `bottle-type-${wineIndex}`) {
                         otherInputContainer.style.display = 'none';
                         manPrev.style.display = 'block';
                         manAfter.style.display = 'none';
-                    } else if (dropdown.value === 'Other') {
+                    }
+                    //color and size
+                    if (dropdown.id === `bottle-color-${wineIndex}` && dropdown.value === 'Other') {
+                        otherInputContainer.style.display = 'block';
+                        bottleSizePrev.style.display = 'none';
+                        bottleSizeNext.style.display = 'block';
+                        // Find the label for the current dropdown
+                        const label = row.querySelector(`label[for="${dropdown.id}"]`);
+                        const labelText = label ? label.textContent.replace('*', '').trim() : 'Other';
+
+                        // Add dynamic input field in the `other-input-container`
+                        otherInputContainer.innerHTML = `
+                        <label for="${dropdown.name}_other" class="form-label">${labelText}(Other)</label>
+                        <input type="text" name="${dropdown.name}_other" class="form-control" placeholder="Please specify" required>
+                    `;
+                    } else if (dropdown.id === `bottle-color-${wineIndex}`) {
+                        otherInputContainer.style.display = 'none';
+                        bottleSizePrev.style.display = 'block';
+                        bottleSizeNext.style.display = 'none';
+                    }
+
+                    if (dropdown.id === `bottle-size-${wineIndex}` && dropdown.value === 'Other') {
+                        sizeSpecify.style.display = 'block';
+                        console.log("hello");
+                    } else if (dropdown.id === `bottle-size-${wineIndex}`) {
+                        sizeSpecify.style.display = 'none';
+                    }
+                    //genarel
+                    else if (dropdown.value === 'Other') {
                         // Find the label for the current dropdown
                         const label = row.querySelector(`label[for="${dropdown.id}"]`);
                         const labelText = label ? label.textContent.replace('*', '').trim() : 'Other';

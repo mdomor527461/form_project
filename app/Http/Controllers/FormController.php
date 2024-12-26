@@ -60,7 +60,7 @@ class FormController extends Controller
                     $service = "LabelPack";
                }
             }
-
+            // print_r($bottling_details);
             foreach ($bottling_details[$i] as $single_detail) {
                 array_push($details, $single_detail);
             }
@@ -88,7 +88,6 @@ class FormController extends Controller
                     'sample_bottle' => $details[15],
                     'packing_requirements' => $details[16],
                     'cartoon' => $details[17],
-
                 ]);
             }
             else if($service == "FillPack"){
@@ -121,12 +120,11 @@ class FormController extends Controller
                     'variety' => $details[2],
                     'volume' => $details[3],
                     'bottle_type' => $details[4],
-                    'bottle_size' => $details[5],
-                    'labelling' => $details[6],
-                    'label_height' => $details[7],
-                    'sample_bottle' => $details[8],
-                    'packing_requirements' => $details[9],
-                    'cartoon' => $details[10],
+                    'labelling' => $details[5],
+                    'label_height' => $details[6],
+                    'sample_bottle' => $details[7],
+                    'packing_requirements' => $details[8],
+                    'cartoon' => $details[9],
                 ]);
             }
         }
