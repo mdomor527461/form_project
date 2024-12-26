@@ -222,16 +222,19 @@
                                             <option value="Other">Other (Please specify)</option>
                                         </select>
                                     </div>
-
-                                    <div class="col-md-4 other-input-container"></div>
-                                </div>
-                                <div class="row mb-3">
-                                    <div class="col-md-4 manufacturer-container">
+                                    <div class="col-md-4 other-input-container" style="display:none"></div>
+                                    <div class="col-md-4" id="man-pre" style="display:block">
                                         <label for="manufacturer-code" class="form-label">Manufacturer & Item Code</label>
                                         <input type="text" id="manufacturer-code" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
                                     </div>
                                 </div>
 
+                                <div class="row mb-3" id="man-aft" style="display:none">
+                                    <div class="col-md-4">
+                                        <label for="manufacturer-code" class="form-label">Manufacturer & Item Code</label>
+                                        <input type="text" id="manufacturer-code" name="bottling_details[${wineCounter}][manufacturer_code]" class="form-control" placeholder="Enter Manufacturer Code">
+                                    </div>
+                                </div>
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="bottle-color" class="form-label">Bottle Colour</label>
@@ -244,12 +247,7 @@
                                             <option value="Arctic Blue">Arctic Blue</option>
                                             <option value="Other">Other (Please specify)</option>
                                         </select>
-
                                     </div>
-                                    <div class="other-input-container col-md-4"></div>
-
-                                </div>
-                                <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="bottle-size" class="form-label">Bottle Size *</label>
                                         <select id="bottle-size" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option" required>
@@ -258,10 +256,9 @@
                                             <option value="375ml">375ml</option>
                                             <option value="Other">Other (Please specify)</option>
                                         </select>
-
                                     </div>
-                                    <div class="other-input-container col-md-4"></div>
                                 </div>
+
 
                                 <h5 class="section-title">Closure Details</h5>
                                 <div class="row mb-3">
@@ -633,9 +630,27 @@
                     // Get the current row, other-input-container, and dynamic row
                     const row = dropdown.closest('.row');
                     const otherInputContainer = row.querySelector('.other-input-container');
+                    const manPrev = document.getElementById('man-pre');
+                    const manAfter = document.getElementById('man-aft');
+                    // If "Other" is selected bottle type and manufacturer
+                    if (dropdown.id === 'bottle-type' && dropdown.value === 'Other') {
+                        otherInputContainer.style.display = 'block';
+                        manPrev.style.display = 'none';
+                        manAfter.style.display = 'block';
+                        // Find the label for the current dropdown
+                        const label = row.querySelector(`label[for="${dropdown.id}"]`);
+                        const labelText = label ? label.textContent.replace('*', '').trim() : 'Other';
 
-                    // If "Other" is selected
-                    if (dropdown.value === 'Other') {
+                        // Add dynamic input field in the `other-input-container`
+                        otherInputContainer.innerHTML = `
+                        <label for="${dropdown.name}_other" class="form-label">${labelText} (Other)</label>
+                        <input type="text" name="${dropdown.name}_other" class="form-control" placeholder="Please specify" required>
+                    `;
+                    } else if (dropdown.id === 'bottle-type') {
+                        otherInputContainer.style.display = 'none';
+                        manPrev.style.display = 'block';
+                        manAfter.style.display = 'none';
+                    } else if (dropdown.value === 'Other') {
                         // Find the label for the current dropdown
                         const label = row.querySelector(`label[for="${dropdown.id}"]`);
                         const labelText = label ? label.textContent.replace('*', '').trim() : 'Other';
