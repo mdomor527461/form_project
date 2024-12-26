@@ -34,44 +34,51 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-8">
-                        <label for="bottling-address" class="form-label">Bottling Address *</label>
+                        <label for="bottling-address" class="form-label">Address *</label>
                         <input type="text" id="bottling-address" name="bottling_address" class="form-control"
-                            placeholder="Address Line 1" required>
+                            placeholder="Street Address" required>
                         <div class="text-danger mt-1">Address details are required.</div>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <input type="text" id="city" name="city" class="form-control mt-2" placeholder="City"
+                        <input type="text" id="city" name="city" class="form-control mt-2" placeholder="City / Locality"
                             required>
                         <div class="text-danger mt-1">Address details are required.</div>
                     </div>
                     <div class="col-md-4">
                         <input type="text" id="zip" name="zip" class="form-control mt-2"
-                            placeholder="Postal / Zip Code" required>
+                            placeholder="Post Code" required>
                         <div class="text-danger mt-1">Address details are required.</div>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="contact-person" class="form-label">Contact Person *</label>
-                        <input type="text" id="contact-person" name="contact_person" class="form-control"
-                            placeholder="Full Name" required>
-                    </div>
-                    <div class="col-md-4">
-                        <label for="contact-phone" class="form-label">Contact Phone *</label>
-                        <input type="text" id="contact-phone" name="contact_phone" class="form-control"
-                            placeholder="Phone Number" required>
-                    </div>
+                   <div class="col-md-8 d-flex justify-content-between gap-4">
+                        <div style="width: 100%;">
+                            <label for="contact-person" class="form-label">Winemaker / Contact person*</label>
+                            <input type="text" id="contact-person" name="contact_person" class="form-control"
+                                placeholder="Full Name" required>
+                        </div>
+                        <div style="width: 100%;">
+                            <label for="email" class="form-label">Email*</label>
+                            <input type="email" id="email" name="email" class="form-control"
+                                placeholder="Email Address" required>
+                        </div>
+                        <div style="width: 100%;">
+                            <label for="contact-phone" class="form-label">Phone *</label>
+                            <input type="text" id="contact-phone" name="contact_phone" class="form-control"
+                                placeholder="Phone Number" required>
+                        </div>
+                   </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="email" class="form-label">Email to Send Invoice *</label>
-                        <input type="email" id="email" name="email" class="form-control"
+                        <label for="email" class="form-label">Accounts Email *</label>
+                        <input type="email" id="email" name="contact_email" class="form-control"
                             placeholder="Email Address" required>
                     </div>
                     <div class="col-md-4">
-                        <label for="power" class="form-label">Power *</label>
+                        <label for="power" class="form-label">Power Supply*</label>
                         <select id="power" name="power" class="form-select" required>
                             <option value="">Select Power Requirement</option>
                             <option value="Single Phase">5 pin, 3 phase power supply</option>

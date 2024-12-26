@@ -26,6 +26,7 @@ class FormController extends Controller
             'contact_person' => 'required|string|max:255',
             'contact_phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
+            'contact_email' => 'required|email|max:255',
             'power' => 'required|string|max:255',
             'special_requirements' => 'nullable|string',
         ]);
