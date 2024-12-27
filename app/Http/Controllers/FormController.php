@@ -47,19 +47,16 @@ class FormController extends Controller
             if ($i == 1) {
                 $service = $bottling_details[$i]['service'];
                 // echo $bottling_details[$i]['service']." ";
+                // echo $service." 1st ";
                 continue;
             }
             else{
-               if(count($bottling_details[$i]) ==18 || count($bottling_details[$i]) ==19){
 
-                $service = "FillLabelPack";
-               }
-               else if(count($bottling_details[$i]) ==16 || count($bottling_details[$i]) == 15){
-                     $service = "FillPack";
-               }
-               else if(count($bottling_details[$i]) ==12 || count($bottling_details[$i]) == 11){
-                    $service = "LabelPack";
-               }
+                 $service = end($bottling_details[$i-1]);
+                //  echo $service." last er gula";
+                // print_r($bottling_details[$i]);
+
+
             }
             // print_r($bottling_details);
             foreach ($bottling_details[$i] as $single_detail) {
@@ -71,45 +68,30 @@ class FormController extends Controller
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
-                    'brand_name' => $details[0],
-                    'year' => $details[1],
+                    'year' => $details[0],
+                    'brand_name' => $details[1],
                     'variety' => $details[2],
-                    'volume' => $details[3],
-                    'tank' => $details[4],
-                    'pre_bottling_filtration' => $details[5],
-                    'filtration_bottling' => $details[6],
-                    'gas_protection' => $details[7],
-                    'bottle_type' => $details[8],
-                    'manufacturer_code' => $details[9],
-                    'bottle_color' => $details[10],
-                    'bottle_size' => $details[11],
-                    'closure_type' => $details[12],
-                    'labelling' => $details[13],
-                    'label_height' => $details[14],
-                    'sample_bottle' => $details[15],
-                    'packing_requirements' => $details[16],
-                    'cartoon' => $details[17],
+                    'tank' => $details[3],
+                    'bottle_type' => $details[4],
+                    'bottle_color' => $details[5],
+                    'manufacturer_code' => $details[6],
+                    'closure_type' => $details[7],
+                    'packing_requirements' => $details[8],
                 ]);
             }
             else if($service == "FillPack"){
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
-                    'brand_name' => $details[0],
-                    'year' => $details[1],
+                    'year' => $details[0],
+                    'brand_name' => $details[1],
                     'variety' => $details[2],
-                    'volume' => $details[3],
-                    'tank' => $details[4],
-                    'pre_bottling_filtration' => $details[5],
-                    'filtration_bottling' => $details[6],
-                    'gas_protection' => $details[7],
-                    'bottle_type' => $details[8],
-                    'manufacturer_code' => $details[9],
-                    'bottle_color' => $details[10],
-                    'bottle_size' => $details[11],
-                    'closure_type' => $details[12],
-                    'packing_requirements' => $details[13],
-                    'cartoon' => $details[14],
+                    'tank' => $details[3],
+                    'bottle_type' => $details[4],
+                    'bottle_color' => $details[5],
+                    'manufacturer_code' => $details[6],
+                    'closure_type' => $details[7],
+                    'packing_requirements' => $details[8],
                 ]);
             }
             else if($service == "LabelPack"){
@@ -121,13 +103,10 @@ class FormController extends Controller
                     'variety' => $details[2],
                     'volume' => $details[3],
                     'bottle_type' => $details[4],
-                    'labelling' => $details[5],
-                    'label_height' => $details[6],
-                    'sample_bottle' => $details[7],
-                    'packing_requirements' => $details[8],
-                    'cartoon' => $details[9],
+                    'packing_requirements' => $details[5],
                 ]);
             }
+
         }
 
 

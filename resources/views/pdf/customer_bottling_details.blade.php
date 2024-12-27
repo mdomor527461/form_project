@@ -130,27 +130,22 @@
                 @endforeach
             </tr>
             <tr>
-                <td>Brand Name</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->brand_name ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
                 <td>Year</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->year ?? '...' }}</td>
                 @endforeach
             </tr>
             <tr>
+                <td>Brand Name</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->brand_name ?? '...' }}</td>
+                @endforeach
+            </tr>
+
+            <tr>
                 <td>Variety</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->variety ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
-                <td>Volume</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->volume ?? '...' }}</td>
                 @endforeach
             </tr>
             <tr>
@@ -160,21 +155,9 @@
                 @endforeach
             </tr>
             <tr>
-                <td>Pre-bottling Filtration</td>
+                <td>Volume</td>
                 @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->pre_bottling_filtration ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
-                <td>Filtration Bottling</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->filtration_bottling ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
-                <td>Gas Protection</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->gas_protection ?? '...' }}</td>
+                    <td>{{ $detail->volume ?? '...' }}</td>
                 @endforeach
             </tr>
             <tr>
@@ -196,45 +179,15 @@
                 @endforeach
             </tr>
             <tr>
-                <td>Bottle Size</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->bottle_size ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
                 <td>Closure Type</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->closure_type ?? '...' }}</td>
                 @endforeach
             </tr>
             <tr>
-                <td>Labelling</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->labelling ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
-                <td>Label Height</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->label_height ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
-                <td>Sample Bottle</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->sample_bottle ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
                 <td>Packing Requirements</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->packing_requirements ?? '...' }}</td>
-                @endforeach
-            </tr>
-            <tr>
-                <td>Cartoon</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->cartoon ?? '...' }}</td>
                 @endforeach
             </tr>
         </table>
