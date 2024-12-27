@@ -52,8 +52,8 @@
         /* Smaller font for tables */
         .bottling-details-table th,
         .bottling-details-table td {
-            font-size: 12px;
-            line-height: 0.8;
+            font-size: 16px;
+            line-height: 1.2;
         }
     </style>
 </head>
@@ -112,7 +112,7 @@
 
 
         {{-- <h6>Table {{ $chunkIndex + 1 }}</h6> --}}
-        <h5>bottling details</h5>
+        <h5 style="margin-top:20px;">bottling details</h5>
         <table class="bottling-details-table">
             <!-- Initialize wine counter -->
 

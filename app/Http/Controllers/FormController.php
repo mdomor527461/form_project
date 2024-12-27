@@ -98,8 +98,8 @@ class FormController extends Controller
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
-                    'brand_name' => $details[0],
-                    'year' => $details[1],
+                    'year' => $details[0],
+                    'brand_name' => $details[1],
                     'variety' => $details[2],
                     'volume' => $details[3],
                     'bottle_type' => $details[4],
