@@ -52,8 +52,8 @@
         /* Smaller font for tables */
         .bottling-details-table th,
         .bottling-details-table td {
-            font-size: 16px;
-            line-height: 1.2;
+            font-size: 12px;
+            line-height: 0.8;
         }
     </style>
 </head>
@@ -161,6 +161,12 @@
                 @endforeach
             </tr>
             <tr>
+                <td style="color:#00aaff">BOTTLE</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td></td>
+                @endforeach
+            </tr>
+            <tr>
                 <td>Bottle Type</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->bottle_type ?? '...' }}</td>
@@ -179,15 +185,51 @@
                 @endforeach
             </tr>
             <tr>
+                <td style="color:#00aaff">CLOSURE</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td></td>
+                @endforeach
+            </tr>
+            <tr>
                 <td>Closure Type</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->closure_type ?? '...' }}</td>
                 @endforeach
             </tr>
             <tr>
+                <td>Closure Description</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->closure_description ?? '...' }}</td>
+                @endforeach
+            </tr>
+            <tr>
+                <td>Apply Capsule</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->apply_capsule ?? '...' }}</td>
+                @endforeach
+            </tr>
+            <tr>
+                <td>Capsule Description</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->capsule_description ?? '...' }}</td>
+                @endforeach
+            </tr>
+            <tr>
+                <td style="color:#00aaff">PACKAGING</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td></td>
+                @endforeach
+            </tr>
+            <tr>
                 <td>Packing Requirements</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->packing_requirements ?? '...' }}</td>
+                @endforeach
+            </tr>
+            <tr>
+                <td>Cartoon</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->cartoon ?? '...' }}</td>
                 @endforeach
             </tr>
         </table>

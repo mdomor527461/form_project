@@ -37,13 +37,14 @@ class FormController extends Controller
 
         $bottling_details = $request->input('bottling_details');
         // print_r($bottling_details);
+        // echo $bottling_details[2]['tank'];
         if (!is_array($bottling_details)) {
             return back()->withErrors(['bottling_details' => 'Invalid bottling details submitted']);
         }
         // print_r($bottling_details);
         // $details = [];
         for ($i = 1; $i <= count($bottling_details); $i++) {
-            $details = [];
+            // $details = [];
             if ($i == 1) {
                 $service = $bottling_details[$i]['service'];
                 // echo $bottling_details[$i]['service']." ";
@@ -59,51 +60,60 @@ class FormController extends Controller
 
             }
             // print_r($bottling_details);
-            foreach ($bottling_details[$i] as $single_detail) {
-                array_push($details, $single_detail);
-            }
-            // echo count($bottling_details[$i])." ";
-            // echo $service." ";
+            // foreach ($bottling_details[$i] as $single_detail) {
+            //     array_push($details, $single_detail);
+            // }
+            // // echo count($bottling_details[$i])." ";
+            // // echo $service." ";
             if($service == "FillLabelPack"){
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
-                    'year' => $details[0],
-                    'brand_name' => $details[1],
-                    'variety' => $details[2],
-                    'tank' => $details[3],
-                    'bottle_type' => $details[4],
-                    'bottle_color' => $details[5],
-                    'manufacturer_code' => $details[6],
-                    'closure_type' => $details[7],
-                    'packing_requirements' => $details[8],
+                    'year' => $bottling_details[$i]['year'],
+                    'brand_name' => $bottling_details[$i]['brand_name'],
+                    'variety' => $bottling_details[$i]['variety'],
+                    'tank' =>  $bottling_details[$i]['tank'],
+                    'bottle_type' =>  $bottling_details[$i]['bottle_type'],
+                    'bottle_color' => $bottling_details[$i]['bottle_color'],
+                    'manufacturer_code' => $bottling_details[$i]['manufacturer_code'],
+                    'closure_type' => $bottling_details[$i]['closure_type'],
+                    'closure_description' => $bottling_details[$i]['closure_description'] ?? null,
+                    'apply_capsule' => $bottling_details[$i]['apply_capsule'] ?? null,
+                    'capsule_description' => $bottling_details[$i]['capsule_description'] ?? null,
+                    'packing_requirements' => $bottling_details[$i]['packing_requirements'],
+                    'cartoon' => $bottling_details[$i]['cartoon'] ?? null,
                 ]);
             }
             else if($service == "FillPack"){
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
-                    'year' => $details[0],
-                    'brand_name' => $details[1],
-                    'variety' => $details[2],
-                    'tank' => $details[3],
-                    'bottle_type' => $details[4],
-                    'bottle_color' => $details[5],
-                    'manufacturer_code' => $details[6],
-                    'closure_type' => $details[7],
-                    'packing_requirements' => $details[8],
+                    'year' => $bottling_details[$i]['year'],
+                    'brand_name' => $bottling_details[$i]['brand_name'],
+                    'variety' => $bottling_details[$i]['variety'],
+                    'tank' =>  $bottling_details[$i]['tank'],
+                    'bottle_type' =>  $bottling_details[$i]['bottle_type'],
+                    'bottle_color' => $bottling_details[$i]['bottle_color'],
+                    'manufacturer_code' => $bottling_details[$i]['manufacturer_code'],
+                    'closure_type' => $bottling_details[$i]['closure_type'],
+                    'closure_description' => $bottling_details[$i]['closure_description'] ?? null,
+                    'apply_capsule' => $bottling_details[$i]['apply_capsule'] ?? null,
+                    'capsule_description' => $bottling_details[$i]['capsule_description'] ?? null,
+                    'packing_requirements' => $bottling_details[$i]['packing_requirements'],
+                    'cartoon' => $bottling_details[$i]['cartoon'] ?? null,
                 ]);
             }
             else if($service == "LabelPack"){
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
-                    'year' => $details[0],
-                    'brand_name' => $details[1],
-                    'variety' => $details[2],
-                    'volume' => $details[3],
-                    'bottle_type' => $details[4],
-                    'packing_requirements' => $details[5],
+                    'year' => $bottling_details[$i]['year'],
+                    'brand_name' => $bottling_details[$i]['brand_name'],
+                    'variety' => $bottling_details[$i]['variety'],
+                    'volume' => $bottling_details[$i]['volume'],
+                    'bottle_type' =>  $bottling_details[$i]['bottle_type'],
+                    'packing_requirements' => $bottling_details[$i]['packing_requirements'],
+                    'cartoon' => $bottling_details[$i]['cartoon'] ?? null,
                 ]);
             }
 
