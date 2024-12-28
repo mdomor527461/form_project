@@ -18,10 +18,11 @@
             @csrf
             <!-- Customer Information -->
             <h3 style="margin-left:20px;">Booking Form</h3>
+            {{-- <p style="margin-left:20px;">"*" indicates required fields</p> --}}
             <div class="section-container">
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="winery" class="form-label">Winery *</label>
+                        <label for="winery" class="form-label">Winery Name*</label>
                         <input type="text" id="winery" name="winery" class="form-control"
                             placeholder="Enter Winery Name" required>
                         <div class="text-danger mt-1">Winery is required.</div>
@@ -73,7 +74,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="email" class="form-label">Accounts Email *</label>
+                        <label for="email" class="form-label">Accounts Email </label>
                         <input type="email" id="email" name="contact_email" class="form-control"
                             placeholder="Email Address" required>
                     </div>
@@ -128,7 +129,7 @@
             productContainer.innerHTML = `
                 <div class="row">
                     <div class="col-md-8 d-flex justify-content-between align-items-center mb-2">
-                    <h4>item#${wineCounter}</h4> <!-- Dynamic wine title -->
+                    <h4>Item#${wineCounter}</h4> <!-- Dynamic wine title -->
                     <button type="button" class="btn-close btn-sm"></button>
                 </div>
                 </div>
@@ -245,6 +246,23 @@
                                     </div>
                                     <div class="other-input-container col-md-4"></div>
                                 </div>
+
+                                  <div class="row mb-3">
+                                    <div id="apply-capsule-${wineCounter}" class="col-md-4" style="display:none">
+                                    <label for="apply_capsule" class="form-label">Apply Capsule*</label>
+                                    <select name="bottling_details[${wineCounter}][apply_capsule]" class="form-select apply-capsule-dropdown">
+                                        <option value="">Select Capsule</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                    </div>
+                                    <div id="capsule-description-${wineCounter}" class="col-md-4" style="display:none">
+                                         <label for="bottling_details[${wineCounter}][capsule_description]" class="form-label">Capsule Description*</label>
+                                        <input type="text" name="bottling_details[${wineCounter}][capsule_description]" class="form-control" placeholder="Enter Capsule details">
+                                    </div>
+                                </div>
+
+
                                 <h5 class="section-title">Packaging</h5>
                                 <div class="row mb-3">
                                     <div class="col-md-4">
@@ -271,7 +289,7 @@
                             `;
                     } else if (e.target.value === 'FillPack') {
                         fields.innerHTML = `
-                                <h5 class="section-title">Wine</h5>
+                        <h5 class="section-title">Wine</h5>
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="year" class="form-label">Year *</label>
@@ -345,7 +363,7 @@
                                 <div class="row mb-3">
                                     <div class="col-md-4">
                                         <label for="closure-type" class="form-label">Closure Type *</label>
-                                        <select id="closure-type" name="bottling_details[${wineCounter}][closure_type]" class="form-select other-option" required>
+                                        <select id="closure-type-${wineCounter}" name="bottling_details[${wineCounter}][closure_type]" class="form-select other-option" required>
                                             <option value="">Select Closure Type</option>
                                             <option value="Screwcap-30x60mm">Screwcap - 30x60mm</option>
                                             <option value="Screwcap-31x60mm">Screwcap - 31x60mm</option>
@@ -359,6 +377,23 @@
                                     </div>
                                     <div class="other-input-container col-md-4"></div>
                                 </div>
+
+                                  <div class="row mb-3">
+                                    <div id="apply-capsule-${wineCounter}" class="col-md-4" style="display:none">
+                                    <label for="apply_capsule" class="form-label">Apply Capsule*</label>
+                                    <select name="bottling_details[${wineCounter}][apply_capsule]" class="form-select apply-capsule-dropdown">
+                                        <option value="">Select Capsule</option>
+                                        <option value="Yes">Yes</option>
+                                        <option value="No">No</option>
+                                    </select>
+                                    </div>
+                                    <div id="capsule-description-${wineCounter}" class="col-md-4" style="display:none">
+                                         <label for="bottling_details[${wineCounter}][capsule_description]" class="form-label">Capsule Description*</label>
+                                        <input type="text" name="bottling_details[${wineCounter}][capsule_description]" class="form-control" placeholder="Enter Capsule details">
+                                    </div>
+                                </div>
+
+
                                 <h5 class="section-title">Packaging</h5>
                                 <div class="row mb-3">
                                     <div class="col-md-4">
@@ -383,7 +418,7 @@
                                     <div class="other-input-container col-md-4"></div>
                                 </div>
                             `;
-                    } else if (e.target.value === 'LabelPack') {
+                        } else if (e.target.value === 'LabelPack') {
                         fields.innerHTML = `
                         <h5 class="section-title">Wine </h5>
                         <div class="row mb-3">
@@ -488,10 +523,9 @@
                     const manPrev = document.getElementById(`man-pre-${wineIndex}`);
                     const manAfter = document.getElementById(`man-aft-${wineIndex}`);
                     const otherColor = document.getElementById(`color-other-${wineIndex}`);
-                    // console.log(manPrev);
-                    // console.log(manAfter);
-                    // console.log(otherColor);
-                    // If "Other" is selected bottle type and manufacturer
+                    const applyCapsule = document.getElementById(`apply-capsule-${wineIndex}`);
+                    const capsuleDesc = document.getElementById(`capsule-description-${wineIndex}`);
+
 
                     //color
                     if (dropdown.id === `bottle-color-${wineIndex}` && dropdown.value === 'Other') {
@@ -516,6 +550,8 @@
 
                     // Handle "Other" option logic
                     if (dropdown.id === `closure-type-${wineIndex}` && dropdown.value === 'Other') {
+                        applyCapsule.style.display = 'none';
+                        capsuleDesc.style.display = 'none';
                         otherInputContainer.classList.remove('col-md-12');
                         otherInputContainer.classList.add('col-md-4');
                         otherInputContainer.innerHTML = `
@@ -527,94 +563,65 @@
                     // Handle "Screwcap" options logic
                     else if (dropdown.value === 'Screwcap-30x60mm' || dropdown.value ===
                         'Screwcap-31x60mm') {
-                        otherInputContainer.classList.remove('col-md-12');
-                        otherInputContainer.classList.add('col-md-4');
+                        applyCapsule.style.display = 'none';
+                        capsuleDesc.style.display = 'none';
                         otherInputContainer.innerHTML = `
                     <label for="${dropdown.name}_screwcap_desc" class="form-label">Screwcap Description*</label>
                     <input type="text" name="bottling_details[${wineCounter}][closure_description]" class="form-control" placeholder="Enter Screwcap details" required>
                 `;
+
                     }
 
-                     // Handle "Cork" options logic
-                else if (
-                    dropdown.value === 'Cork-Natural' ||
-                    dropdown.value === 'Cork-Diam5' ||
-                    dropdown.value === 'Cork-Diam10' ||
-                    dropdown.value === 'Cork-Diam20' ||
-                    dropdown.value === 'Cork-Diam30'
-                ) {
-                    // otherInputContainer.classList.remove('col-md-12');
-                    // otherInputContainer.classList.add('col-md-4');
-                    otherInputContainer.innerHTML = `
-                            <div class="row mb-3">
-                                <div class="col-md-4">
-                                    <label for="${dropdown.name}_screwcap_desc" class="form-label">Cork Description*</label>
-                                    <input type="text" name="bottling_details[${wineCounter}][closure_description]" class="form-control" placeholder="Enter Cork details" required>
-                                </div>
-                            </div>
-                        `;
-                    otherInputContainer.classList.remove('col-md-4');
-                    otherInputContainer.classList.add('col-md-12');
-                    otherInputContainer.innerHTML += `
-                        <div class="row mt-3">
-                                <div class="col-md-4">
-                                    <label for="${dropdown.name}_apply_capsule" class="form-label">Apply Capsule*</label>
-                                    <select name="bottling_details[${wineCounter}][apply_capsule]" class="form-select apply-capsule-dropdown" required>
-                                        <option value="">Select Capsule</option>
-                                        <option value="Yes">Yes</option>
-                                        <option value="No">No</option>
-                                    </select>
-                                </div>
-                                <div class="col-md-4 capsule-description-container"></div>
-                            </div>
-                    `;
-                ;
+                    // Handle "Cork" options logic
+                    else if (
+                        dropdown.value === 'Cork-Natural' ||
+                        dropdown.value === 'Cork-Diam5' ||
+                        dropdown.value === 'Cork-Diam10' ||
+                        dropdown.value === 'Cork-Diam20' ||
+                        dropdown.value === 'Cork-Diam30'
+                    ) {
+                        // otherInputContainer.classList.remove('col-md-12');
+                        // otherInputContainer.classList.add('col-md-4');
+                        applyCapsule.style.display = 'block';
+                        otherInputContainer.innerHTML = `
+                    <label for="${dropdown.name}_screwcap_desc" class="form-label">Cork Description*</label>
+                    <input type="text" name="bottling_details[${wineCounter}][closure_description]" class="form-control" placeholder="Enter Screwcap details" required>
+                `;
+                        const applyCapsuleDropdown = document.querySelector('[name="bottling_details[' +
+                            wineCounter + '][apply_capsule]"]');
 
-
-            // Add event listener for the dynamically created dropdown
-                const capsuleDropdown = otherInputContainer.querySelector('.apply-capsule-dropdown');
-                capsuleDropdown.addEventListener('change', (capsuleEvent) => {
-                    const capsuleValue = capsuleEvent.target.value;
-                    const capsuleDescContainer = otherInputContainer.querySelector('.capsule-description-container');
-
-                    // Clear the capsule description container first
-                    capsuleDescContainer.innerHTML = '';
-
-                    if (capsuleValue === 'Yes') {
-                        capsuleDescContainer.innerHTML = `
-                            <label for="bottling_details[${wineCounter}][capsule_description]" class="form-label">Capsule Description*</label>
-                            <input type="text" name="bottling_details[${wineCounter}][capsule_description]" class="form-control" placeholder="Enter Capsule details" required>
-                        `;
+                        applyCapsuleDropdown.addEventListener('change', (event) => {
+                            if (event.target.value === 'Yes') {
+                               capsuleDesc.style.display = 'block';// Show capsule description
+                            } else {
+                                capsuleDesc.style.display = 'none'; // Hide capsule description
+                            }
+                        });
                     }
-
-                });
-            }
-             //packaging
-             if(dropdown.id === `packing-requirements-${wineIndex}` && dropdown.value === 'Other') {
-                    otherInputContainer.innerHTML = `
+                    //packaging
+                    if (dropdown.id === `packing-requirements-${wineIndex}` && dropdown.value === 'Other') {
+                        otherInputContainer.innerHTML = `
                     <label for="${dropdown.name}_other" class="form-label">Description*</label>
                     <input type="text" name="${dropdown.name}_other" class="form-control" placeholder="Please specify" required>
                 `;
-                }
-
-            else if (dropdown.id === `packing-requirements-${wineIndex}` && (dropdown.value !== 'Cellar Stacks' && dropdown.value !=='Bins')) {
-                    otherInputContainer.innerHTML = `
+                    } else if (dropdown.id === `packing-requirements-${wineIndex}` && (dropdown.value !==
+                            'Cellar Stacks' && dropdown.value !== 'Bins')) {
+                        otherInputContainer.innerHTML = `
                     <label for="${dropdown.name}_other" class="form-label">Cartoon Message*</label>
                     <input type="text" name="bottling_details[${wineCounter}][cartoon]" class="form-control" placeholder="Please specify" required>
                 `;
-            }
-            else if(dropdown.value == 'Other'){
-                otherInputContainer.innerHTML = '';
-            }
+                    } else if (dropdown.value == 'Other') {
+                        otherInputContainer.innerHTML = '';
+                    }
 
-            //genarel
-            if (dropdown.value === 'Other') {
-                otherInputContainer.innerHTML = `
-            <label for="${dropdown.name}_other" class="form-label">Description*</label>
-            <input type="text" name="${dropdown.name}_other" class="form-control" placeholder="Please specify" required>
-            `;
-            }
-            }
+                    //genarel
+                    if (dropdown.value === 'Other') {
+                        otherInputContainer.innerHTML = `
+                <label for="${dropdown.name}_other" class="form-label">Description*</label>
+                <input type="text" name="${dropdown.name}_other" class="form-control" placeholder="Please specify" required>
+                `;
+                    }
+                }
             });
 
             // Handle form submission

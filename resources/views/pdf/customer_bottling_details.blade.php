@@ -112,7 +112,7 @@
 
 
         {{-- <h6>Table {{ $chunkIndex + 1 }}</h6> --}}
-        <h5 style="margin-top:20px;">bottling details</h5>
+        <h5 style="margin-top:20px;">Bottling Details</h5>
         <table class="bottling-details-table">
             <!-- Initialize wine counter -->
 
