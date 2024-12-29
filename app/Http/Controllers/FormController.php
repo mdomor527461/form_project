@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 use App\Models\CustomerInformation;
 use App\Models\BottlingDetails;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Expr\Cast\Array_;
 use Barryvdh\DomPDF\Facade\Pdf;
+
 class FormController extends Controller
 {
     public function index()
@@ -49,10 +51,9 @@ class FormController extends Controller
                 // echo $bottling_details[$i]['service']." ";
                 // echo $service." 1st ";
                 continue;
-            }
-            else{
+            } else {
 
-                 $service = end($bottling_details[$i-1]);
+                $service = end($bottling_details[$i - 1]);
                 //  echo $service." last er gula";
                 // print_r($bottling_details[$i]);
 
@@ -62,9 +63,9 @@ class FormController extends Controller
             // foreach ($bottling_details[$i] as $single_detail) {
             //     array_push($details, $single_detail);
             // }
-            // // echo count($bottling_details[$i])." ";
-            // // echo $service." ";
-            if($service == "FillLabelPack"){
+            // echo count($bottling_details[$i])." ";
+            // echo $service." ";
+            if ($service == "FillLabelPack") {
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
@@ -72,8 +73,16 @@ class FormController extends Controller
                     'brand_name' => $bottling_details[$i]['brand_name'],
                     'variety' => $bottling_details[$i]['variety'],
                     'tank' =>  $bottling_details[$i]['tank'],
+                    'pre_bottling_filtration' =>  $bottling_details[$i]['pre_bottling_filtration'],
+                    'filtration_bottling' =>  $bottling_details[$i]['filtration_bottling'],
+                    'gas_protection' =>  $bottling_details[$i]['gas_protection'],
                     'bottle_type' =>  $bottling_details[$i]['bottle_type'],
-                    'bottle_color' => $bottling_details[$i]['bottle_color'],
+                    'bottle_color' => isset($bottling_details[$i]['bottle_color']) && $bottling_details[$i]['bottle_color'] === "Other"
+                        ? ($bottling_details[$i]['bottle_color_other'] ?? null)
+                        : ($bottling_details[$i]['bottle_color'] ?? null),
+                    'bottle_size' => isset($bottling_details[$i]['bottle_size']) && $bottling_details[$i]['bottle_size'] === "Other"
+                        ? ($bottling_details[$i]['bottle_size_other'] ?? null)
+                        : ($bottling_details[$i]['bottle_size'] ?? null),
                     'manufacturer_code' => $bottling_details[$i]['manufacturer_code'],
                     'closure_type' => $bottling_details[$i]['closure_type'],
                     'closure_description' => $bottling_details[$i]['closure_description'] ?? null,
@@ -82,8 +91,7 @@ class FormController extends Controller
                     'packing_requirements' => $bottling_details[$i]['packing_requirements'],
                     'cartoon' => $bottling_details[$i]['cartoon'] ?? null,
                 ]);
-            }
-            else if($service == "FillPack"){
+            } else if ($service == "FillPack") {
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
@@ -91,8 +99,16 @@ class FormController extends Controller
                     'brand_name' => $bottling_details[$i]['brand_name'],
                     'variety' => $bottling_details[$i]['variety'],
                     'tank' =>  $bottling_details[$i]['tank'],
+                    'pre_bottling_filtration' =>  $bottling_details[$i]['pre_bottling_filtration'],
+                    'filtration_bottling' =>  $bottling_details[$i]['filtration_bottling'],
+                    'gas_protection' =>  $bottling_details[$i]['gas_protection'],
                     'bottle_type' =>  $bottling_details[$i]['bottle_type'],
-                    'bottle_color' => $bottling_details[$i]['bottle_color'],
+                    'bottle_color' => isset($bottling_details[$i]['bottle_color']) && $bottling_details[$i]['bottle_color'] === "Other"
+                    ? ($bottling_details[$i]['bottle_color_other'] ?? null)
+                    : ($bottling_details[$i]['bottle_color'] ?? null),
+                    'bottle_size' => isset($bottling_details[$i]['bottle_size']) && $bottling_details[$i]['bottle_size'] === "Other"
+                    ? ($bottling_details[$i]['bottle_size_other'] ?? null)
+                    : ($bottling_details[$i]['bottle_size'] ?? null),
                     'manufacturer_code' => $bottling_details[$i]['manufacturer_code'],
                     'closure_type' => $bottling_details[$i]['closure_type'],
                     'closure_description' => $bottling_details[$i]['closure_description'] ?? null,
@@ -101,25 +117,26 @@ class FormController extends Controller
                     'packing_requirements' => $bottling_details[$i]['packing_requirements'],
                     'cartoon' => $bottling_details[$i]['cartoon'] ?? null,
                 ]);
-            }
-            else if($service == "LabelPack"){
+            } else if ($service == "LabelPack") {
                 BottlingDetails::create([
                     'customer_id' => $customer->id, // Replace with actual customer ID
                     'service' => $service,
                     'year' => $bottling_details[$i]['year'],
                     'brand_name' => $bottling_details[$i]['brand_name'],
                     'variety' => $bottling_details[$i]['variety'],
-                    'volume' => $bottling_details[$i]['volume'],
+                    'volume' => $bottling_details[$i]['volume'] ?? null,
+                    'pre_bottling_filtration' =>  $bottling_details[$i]['pre_bottling_filtration'],
+                    'filtration_bottling' =>  $bottling_details[$i]['filtration_bottling'],
+                    'gas_protection' =>  $bottling_details[$i]['gas_protection'],
                     'bottle_type' =>  $bottling_details[$i]['bottle_type'],
+                   'bottle_size' => isset($bottling_details[$i]['bottle_size']) && $bottling_details[$i]['bottle_size'] === "Other"
+                    ? ($bottling_details[$i]['bottle_size_other'] ?? null)
+                    : ($bottling_details[$i]['bottle_size'] ?? null),
                     'packing_requirements' => $bottling_details[$i]['packing_requirements'],
                     'cartoon' => $bottling_details[$i]['cartoon'] ?? null,
                 ]);
             }
-
         }
-
-
-
 
         // Retrieve saved bottling details for the customer
         $bottlingDetails = BottlingDetails::where('customer_id', $customer->id)->get();
