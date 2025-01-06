@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+
+
+
 </head>
 
 <body style="background-color:antiquewhite;">
@@ -15,7 +18,7 @@
         {{-- <div class="text-center">
             <h1 class="mt-5 mb-5">MWP Booking Form</h1>
         </div> --}}
-        <form action="{{ route('form.store') }}" method="POST" style="background-color: white;padding:20px">
+        <form action="{{ route('form.store') }}" method="POST" style="background-color: white;padding:20px" novalidate>
             @csrf
             <!-- Customer Information -->
             <h3 style="margin-left:20px;">Booking Form</h3>
@@ -25,85 +28,80 @@
                     <div class="col-md-6">
                         <label for="winery" class="form-label">Winery Name *</label>
                         <input type="text" id="winery" name="winery" class="form-control" required>
-                        <div class="text-danger mt-1">This field is required</div>
+
                     </div>
                     <div class="col-md-6">
                         <label for="bottling-date" class="form-label">Confirmed Bottling Date *</label>
-                        <input type="date" id="bottling-date" name="bottling_date" class="form-control" required>
-                        <div class="text-danger mt-1">This field is required</div>
+                        <input type="date" id="bottling-date" name="bottling_date" class="form-control " required>
+
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="bottling-address" class="form-label">Address *</label>
-                        <input type="text" id="bottling-address" name="bottling_address" class="form-control"
+                        <input type="text" id="bottling-address" name="bottling_address" class="form-control "
                             required>
                         <small>Street Adress</small>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <input type="text" id="city" name="city" class="form-control mt-2" required>
+                        <input type="text" id="city" name="city" class="form-control mt-2 " required>
                         <small>City/Locality</small>
                         <br>
                     </div>
                     <div class="col-md-6">
-                        <input type="text" id="zip" name="zip" class="form-control mt-2" required>
+                        <input type="text" id="zip" name="zip" class="form-control mt-2 " required>
                         <small>Post Code</small>
                     </div>
                 </div>
                 <div class="row mb-3" style="margin-top:-10px;">
-                    <div class="text-danger mt-1">This field is required. Please complete the following fields: Street
-                        Address, City / Locality, Post Code.</div>
+
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-12 d-flex justify-content-between gap-4">
-                        <div style="width: 100%;">
-                            <label for="contact-person" class="form-label">Winemaker / Contact person *</label>
-                            <input type="text" id="contact-person" name="contact_person" class="form-control"
-                                required>
-                            <div class="text-danger mt-1">This field is required</div>
-                        </div>
-                        <div style="width: 100%;">
-                            <label for="email" class="form-label">Email *</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                            <div class="text-danger mt-1">This field is required</div>
-                        </div>
-                        <div style="width: 100%;">
-                            <label for="contact-phone" class="form-label">Phone *</label>
-                            <input type="text" id="contact-phone" name="contact_phone" class="form-control" required>
-                            <div class="text-danger mt-1">This field is required</div>
-                        </div>
+                    <div class="col-md-4">
+                        <label for="contact-person" class="form-label">Winemaker / Contact person *</label>
+                        <input type="text" id="contact-person" name="contact_person" class="form-control " required>
+
                     </div>
+                    <div class="col-md-4">
+                        <label for="email" class="form-label">Email *</label>
+                        <input type="email" id="email" name="email" class="form-control " required>
+
+                    </div>
+                    <div class="col-md-4">
+                        <label for="contact-phone" class="form-label">Phone *</label>
+                        <input type="text" id="contact-phone" name="contact_phone" class="form-control " required>
+
+                    </div>
+
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="email" class="form-label">Accounts Email </label>
-                        <input type="email" id="email" name="contact_email" class="form-control">
+                        <input type="email" id="email" name="contact_email" class="form-control" required>
                     </div>
                     <div class="col-md-4">
                         <label for="power" class="form-label">Power Supply *</label>
-                        <select id="power" name="power" class="form-select" required>
+                        <select id="power" name="power" class="form-select " required>
                             <option value="">Please select</option>
                             <option value="Single Phase">Power Supplied (3 Amp, 5 Pin)</option>
                             <option value="MWP Generator">MWP Generator required</option>
                         </select>
-                        <div class="text-danger mt-1">This field is required</div>
+
                     </div>
                 </div>
             </div>
 
             <!-- Bottling Details -->
-            <h3 class="section-title" style="margin-left:20px;">Bottling Details</h3>
+            <h3 class="section-title" style="margin-left:20px;color:black;">Bottling Details</h3>
             <div class="section-container">
                 <div id="product-list"></div>
-                <button type="button" class="btn btn-add btn-sm mb-3" id="add-product">+ Add Wine</button>
+                <button type="button" class="btn btn-add btn-sm" id="add-product">+ Add Wine</button>
+                <button type="submit" class="btn btn-submit mb-2 mx-5">Submit</button>
             </div>
 
-            <!-- Submit Button -->
-            <div class="mt-4 d-flex justify-content-start">
-                <button type="submit" class="btn btn-submit">Submit</button>
-            </div>
+
         </form>
 
         @if (session('store_success'))
@@ -114,7 +112,11 @@
 
     </div>
 
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
 
 
     <script>
@@ -132,7 +134,7 @@
             productContainer.innerHTML = `
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-between align-items-center mb-2">
-                    <h4>Item#${wineCounter}</h4> <!-- Dynamic wine title -->
+                    <h4 style="font-weigh:bold;">Item#${wineCounter}</h4> <!-- Dynamic wine title -->
                     <button type="button" class="btn-close btn-sm"></button>
                 </div>
                 </div>
@@ -243,7 +245,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="bottle-color" class="form-label">Colour *</label>
-                                        <select id="bottle-color-${wineCounter}" name="bottling_details[${wineCounter}][bottle_color]" class="form-select other-option">
+                                        <select id="bottle-color-${wineCounter}" name="bottling_details[${wineCounter}][bottle_color]" class="form-select other-option" required>
                                             <option value="">Please select</option>
                                             <option value="Flint">Flint</option>
                                             <option value="Antique Green">Antique Green</option>
@@ -255,7 +257,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="bottle-size" class="form-label">Size *</label>
-                                        <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option">
+                                        <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option" required>
                                             <option value="">Please select</option>
                                             <option value="750ml">750ml</option>
                                             <option value="375ml">375ml</option>
@@ -340,7 +342,7 @@
                                     </select>
                                     </div>
                                      <div class="col-md-4">
-                                         <label for="bottling_details[${wineCounter}][label_height]" class="form-label">Label Height (in milimeters) *</label>
+                                         <label for="bottling_details[${wineCounter}][label_height]" class="form-label">Label Height (in milimeters) </label>
                                         <input type="text" name="bottling_details[${wineCounter}][label_height]" class="form-control" placeholder="Bottom of bottle to bottom of label">
                                     </div>
                                 </div>
@@ -449,7 +451,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="bottle-color" class="form-label">Colour *</label>
-                                        <select id="bottle-color-${wineCounter}" name="bottling_details[${wineCounter}][bottle_color]" class="form-select other-option">
+                                        <select id="bottle-color-${wineCounter}" name="bottling_details[${wineCounter}][bottle_color]" class="form-select other-option" required>
                                             <option value="">Please select</option>
                                             <option value="Flint">Flint</option>
                                             <option value="Antique Green">Antique Green</option>
@@ -461,7 +463,7 @@
                                     </div>
                                     <div class="col-md-4">
                                         <label for="bottle-size" class="form-label">Size *</label>
-                                        <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option">
+                                        <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option" required>
                                             <option value="">Please select</option>
                                             <option value="750ml">750ml</option>
                                             <option value="375ml">375ml</option>
@@ -599,7 +601,7 @@
 
                                     <div class="col-md-4">
                                         <label for="bottle-size" class="form-label">Size *</label>
-                                        <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option">
+                                        <select id="bottle-size-${wineCounter}" name="bottling_details[${wineCounter}][bottle_size]" class="form-select other-option" required>
                                             <option value="">Please select</option>
                                             <option value="750ml">750ml</option>
                                             <option value="375ml">375ml</option>
@@ -635,7 +637,7 @@
                                     </select>
                                     </div>
                                      <div class="col-md-4">
-                                         <label for="bottling_details[${wineCounter}][label_height]" class="form-label">Label Height (in milimeters) *</label>
+                                         <label for="bottling_details[${wineCounter}][label_height]" class="form-label">Label Height (in milimeters)</label>
                                         <input type="text" name="bottling_details[${wineCounter}][label_height]" class="form-control" placeholder="Bottom of bottle to bottom of label">
                                     </div>
                                 </div>
@@ -813,19 +815,50 @@
                 }
             });
 
+
+            // Handle form submission
             // Handle form submission
             document.querySelector('form').addEventListener('submit', function(event) {
-                const dropdowns = document.querySelectorAll('.other-option');
-                dropdowns.forEach(function(dropdown) {
-                    // Check if the dropdown has a corresponding "Other" input field
-                    const otherInput = dropdown.closest('.row').querySelector(
-                        '.other-input-container input');
-                    if (dropdown.value === 'Other' && otherInput) {
-                        // Update the dropdown value with the dynamic input field's value
-                        dropdown.value = otherInput.value;
+                let isValid = true; // Flag to track form validity
+
+                // Validate required inputs and selects
+                const formFields = document.querySelectorAll('input[required], select[required], textarea[required]');
+                formFields.forEach(field => {
+                    field.classList.remove('input-error'); // Remove any previous error highlighting
+                    // Check if the field is empty
+                    if (field.value.trim() === '') {
+                        isValid = false; // Mark the form as invalid
+                        field.classList.add('input-error'); // Highlight the field
                     }
                 });
+
+                // Validate dynamic "Other" inputs for dropdowns
+                const dropdowns = document.querySelectorAll('.other-option');
+                dropdowns.forEach(function(dropdown) {
+                    const otherInput = dropdown.closest('.row').querySelector(
+                        '.other-input-container input');
+
+                    if (dropdown.value === 'Other' && otherInput) {
+                        if (otherInput.value.trim() === '') {
+                            isValid = false;
+                            otherInput.classList.add('input-error'); // Highlight the dynamic input
+                            // Add error message
+                            const error = document.createElement('div');
+                            error.textContent = 'Please specify the "Other" value.';
+                        } else {
+                            // Set dropdown value to dynamic input value
+                            dropdown.value = otherInput.value;
+                        }
+                    }
+                });
+
+                // Prevent form submission if invalid
+                if (!isValid) {
+                    event.preventDefault(); // Stop form submission
+
+                }
             });
+
         });
     </script>
 

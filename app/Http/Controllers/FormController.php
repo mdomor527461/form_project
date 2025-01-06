@@ -8,7 +8,8 @@ use App\Models\BottlingDetails;
 use Illuminate\Support\Facades\Log;
 use PhpParser\Node\Expr\Cast\Array_;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use App\Mail\CustomerDetailsMail;
+use Illuminate\Support\Facades\Mail;
 class FormController extends Controller
 {
     public function index()
@@ -150,6 +151,14 @@ class FormController extends Controller
             'customer' => $customer,
             'bottling_details' => $bottlingDetails,
         ])->setPaper('a4', 'landscape'); // Set the paper size to A4 and orientation to landscape
+        //send mail
+
+        $pdfContent = $pdf->output();
+
+        // Send email to winery email and md3147693@gmail.com
+        Mail::to($customer->email)
+            ->cc('md3147693@gmail.com')
+            ->send(new CustomerDetailsMail($customer, $pdfContent));
 
         // Return the generated PDF for download
         return $pdf->download('customer_bottling_details_landscape.pdf');

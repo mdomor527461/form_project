@@ -25,7 +25,7 @@ body {
     margin-bottom: 15px;
     /* margin-left:20px; */
     text-transform: uppercase;
-    font-weight: bold;
+    color:blue;
 }
 
 .section-container {
@@ -42,6 +42,10 @@ body {
     display: block;
     color: #333;
 }
+input, select {
+    border: 2px solid black; /* Initial border color */
+}
+
 
 .form-control, .form-select {
     padding: 5px; /* Increased padding for fields */
@@ -55,6 +59,7 @@ body {
     outline: none; /* Removes the default browser outline */
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Optional shadow for better UX */
 }
+
 textarea.form-control {
     resize: none;
 }
@@ -103,4 +108,8 @@ input[type="date"] {
     font-size: 15px;
     padding: 5px;
     width: 50%;
+}
+.input-error {
+    border: 2px solid rgb(214, 121, 121) !important; /* Red border for invalid fields */
+    background-color: #ffe6e6; /* Optional: light red background */
 }
