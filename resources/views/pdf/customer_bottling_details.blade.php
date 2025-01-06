@@ -23,7 +23,7 @@
         th,
         td {
             border: 1px solid black;
-            text-align: center;
+            text-align: left;
             color: black;
             padding: 5px;
         }
@@ -52,8 +52,8 @@
         /* Smaller font for tables */
         .bottling-details-table th,
         .bottling-details-table td {
-            font-size: 12px;
-            line-height: 0.8;
+            font-size: 9px;
+            line-height: 0.5;
         }
     </style>
 </head>
@@ -65,16 +65,19 @@
     <!-- Bottling Details Section -->
     {{-- <div class="page-break"></div> --}}
     {{-- <h3>Mobline Wine Proccessing Form</h3> --}}
-    @php $wineNumber = 1; @endphp
+    @php $wineNumber = 1;
+
+    @endphp
     @foreach ($bottling_details->chunk(5) as $chunkIndex => $bottlingChunk)
         <div style="width: 100%; display: table;">
 
             <!-- Left Section: MWP Content -->
             <div
-                style="display: table-cell; width: 25%; vertical-align: top; border: 1px solid black; padding: 10px; text-align: center;">
-                <h1 style="color: red; margin: 0;font-size:60px;">M<span style="color:#00aaff;">WP</span></h1>
+                style="display: table-cell; width: 25%; vertical-align: center; border: 1px solid black; padding: 10px; text-align: center;">
+                {{-- <h1 style="color: red; margin: 0;font-size:60px;">M<span style="color:#00aaff;">WP</span></h1>
                 <p style="margin: 5px 0; font-size: 14px;">Mobile Wine Processing</p>
-                <p style="margin: 0; font-size: 12px; font-style: italic;">The Estate Bottling Specialists</p>
+                <p style="margin: 0; font-size: 12px; font-style: italic;">The Estate Bottling Specialists</p> --}}
+                <img src="{{public_path('img/logo/MWP_Logo-1536x759.jpg')}}" alt="" style="width:200px;">
             </div>
 
             <!-- Right Section: Customer Information -->
@@ -89,21 +92,20 @@
                     </tr>
                     <tr>
                         <th style="border: 1px solid black; padding: 5px; text-align: left;">Bottling Address:</th>
-                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->bottling_address }}</td>
+                        <td style="border: 1px solid black; padding: 5px;" colspan="3">{{ $customer->bottling_address }}</td>
+                    </tr>
+                    <tr>
                         <th style="border: 1px solid black; padding: 5px; text-align: left;">Contact Name:</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->contact_person }}</td>
-                    </tr>
-                    <tr>
                         <th style="border: 1px solid black; padding: 5px; text-align: left;">Phone:</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->contact_phone }}</td>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Email:</th>
-                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->email }}</td>
+
                     </tr>
                     <tr>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Power</th>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Email:</th>
+                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->email }}</td>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Power Supply</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->power }}</td>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Requirements</th>
-                        <td style="border: 1px solid black; padding: 5px;">{{ $customer->special_requirements }}</td>
                     </tr>
                 </table>
             </div>
@@ -112,125 +114,290 @@
 
 
         {{-- <h6>Table {{ $chunkIndex + 1 }}</h6> --}}
-        <h5 style="margin-top:20px;">Bottling Details</h5>
+        <h5 style="margin-top:10px;">Bottling Details</h5>
         <table class="bottling-details-table">
             <!-- Initialize wine counter -->
 
             <tr>
-                <th>WINE</th>
-                @foreach ($bottlingChunk as $detail)
-                    <th>Wine #{{ $wineNumber }}</th>
-                    @php $wineNumber++; @endphp <!-- Increment wine counter -->
-                @endforeach
+                <th style="text-align: left;">WINE</th>
+                @for ($i = 0; $i < 5; $i++)
+                    <th>Wine #{{ $wineNumber++ }}</th>
+                @endfor
             </tr>
             <tr>
                 <td>Service <span class="required">*</span></td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->service ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                        <td></td>
+                @endfor
+            </tr>
+
+            <tr>
+                <td>Brand</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->brand_name ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
                 <td>Year</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->year ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
-            <tr>
-                <td>Brand Name</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->brand_name ?? '...' }}</td>
-                @endforeach
-            </tr>
-
             <tr>
                 <td>Variety</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->variety ?? '...' }}</td>
                 @endforeach
-            </tr>
-            <tr>
-                <td>Tank</td>
-                @foreach ($bottlingChunk as $detail)
-                    <td>{{ $detail->tank ?? '...' }}</td>
-                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
                 <td>Volume</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->volume ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
+            <tr>
+                <td>Tank</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->tank ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+            <tr>
+                <td style="color:#00aaff">FILTRATION</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td></td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+            <tr>
+                <td>Current Filtraton</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->pre_bottling_filtration ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+            <tr>
+                <td>Required Filtration </td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->filtration_bottling ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+            <tr>
+                <td>Gas Protection ?</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->gas_protection ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+
             <tr>
                 <td style="color:#00aaff">BOTTLE</td>
                 @foreach ($bottlingChunk as $detail)
                     <td></td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
-                <td>Bottle Type</td>
+                <td>Type</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->bottle_type ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
-                <td>Manufacturer Code</td>
+                <td>Code</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->manufacturer_code ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
-                <td>Bottle Color</td>
+                <td>Color</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->bottle_color ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+            <tr>
+                <td>Size</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->bottle_size ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
                 <td style="color:#00aaff">CLOSURE</td>
                 @foreach ($bottlingChunk as $detail)
                     <td></td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
-                <td>Closure Type</td>
+                <td>Type</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->closure_type ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
-                <td>Closure Description</td>
+                <td>Description</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->closure_description ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
-                <td>Apply Capsule</td>
+                <td>Capsule (cork only)</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->apply_capsule ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
                 <td>Capsule Description</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->capsule_description ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
+
+            <tr>
+                <td style="color:#00aaff">LABALING</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td></td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+            <tr>
+
+                <td>Type</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->labelling ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+             <tr>
+
+                <td>Height</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $detail->label_height ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+             <tr>
+                @php
+                if($detail->sample_bottle == 1){
+                    $sample = 'Yes';
+                }
+                else if($detail->sample_bottle == 0){
+                    $sample = 'No';;
+                }
+                @endphp
+                <td>Sample Available</td>
+                @foreach ($bottlingChunk as $detail)
+                    <td>{{ $sample ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+
             <tr>
                 <td style="color:#00aaff">PACKAGING</td>
                 @foreach ($bottlingChunk as $detail)
                     <td></td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
                 <td>Packing Requirements</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->packing_requirements ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
             </tr>
             <tr>
-                <td>Cartoon</td>
+                <td>Carton Message</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->cartoon ?? '...' }}</td>
                 @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                <td></td>
+                @endfor
+            </tr>
+            <tr>
+                <td>Bottles (office use only)</td>
+                @foreach ($bottlingChunk as $detail)
+                    @php
+                        if ($detail->bottle_size == '750ml') {
+                            $bottles = round(($detail->volume * 1000) / 750); // 750ml বোতলের জন্য
+                        } elseif ($detail->bottle_size == '375ml') {
+                            $bottles = round(($detail->volume * 1000) / 375); // 375ml বোতলের জন্য
+                        } else {
+                            $bottles = round(($detail->volume * 1000) / (int) $detail->bottle_size); // অন্য সাইজের বোতলের জন্য
+                        }
+                    @endphp
+                    <td>{{ $bottles ?? '...' }}</td>
+                @endforeach
+                @for ($i = $bottlingChunk->count(); $i < 5; $i++)
+                    <td></td>
+                @endfor
             </tr>
         </table>
 

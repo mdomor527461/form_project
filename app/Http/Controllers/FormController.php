@@ -72,6 +72,7 @@ class FormController extends Controller
                     'year' => $bottling_details[$i]['year'],
                     'brand_name' => $bottling_details[$i]['brand_name'],
                     'variety' => $bottling_details[$i]['variety'],
+                    'volume' => $bottling_details[$i]['volume'] ?? null,
                     'tank' =>  $bottling_details[$i]['tank'],
                     'pre_bottling_filtration' =>  $bottling_details[$i]['pre_bottling_filtration'],
                     'filtration_bottling' =>  $bottling_details[$i]['filtration_bottling'],
@@ -88,6 +89,9 @@ class FormController extends Controller
                     'closure_description' => $bottling_details[$i]['closure_description'] ?? null,
                     'apply_capsule' => $bottling_details[$i]['apply_capsule'] ?? null,
                     'capsule_description' => $bottling_details[$i]['capsule_description'] ?? null,
+                    'labelling' => $bottling_details[$i]['labeling'],
+                    'sample_bottle' => $bottling_details[$i]['sample_bottle'],
+                    'label_height' => $bottling_details[$i]['label_height'],
                     'packing_requirements' => $bottling_details[$i]['packing_requirements'],
                     'cartoon' => $bottling_details[$i]['cartoon'] ?? null,
                 ]);
@@ -98,6 +102,7 @@ class FormController extends Controller
                     'year' => $bottling_details[$i]['year'],
                     'brand_name' => $bottling_details[$i]['brand_name'],
                     'variety' => $bottling_details[$i]['variety'],
+                    'volume' => $bottling_details[$i]['volume'] ?? null,
                     'tank' =>  $bottling_details[$i]['tank'],
                     'pre_bottling_filtration' =>  $bottling_details[$i]['pre_bottling_filtration'],
                     'filtration_bottling' =>  $bottling_details[$i]['filtration_bottling'],
@@ -125,13 +130,14 @@ class FormController extends Controller
                     'brand_name' => $bottling_details[$i]['brand_name'],
                     'variety' => $bottling_details[$i]['variety'],
                     'volume' => $bottling_details[$i]['volume'] ?? null,
-                    'pre_bottling_filtration' =>  $bottling_details[$i]['pre_bottling_filtration'],
-                    'filtration_bottling' =>  $bottling_details[$i]['filtration_bottling'],
-                    'gas_protection' =>  $bottling_details[$i]['gas_protection'],
+
                     'bottle_type' =>  $bottling_details[$i]['bottle_type'],
                    'bottle_size' => isset($bottling_details[$i]['bottle_size']) && $bottling_details[$i]['bottle_size'] === "Other"
                     ? ($bottling_details[$i]['bottle_size_other'] ?? null)
                     : ($bottling_details[$i]['bottle_size'] ?? null),
+                    'labelling' => $bottling_details[$i]['labeling'],
+                    'sample_bottle' => $bottling_details[$i]['sample_bottle'],
+                    'label_height' => $bottling_details[$i]['label_height'],
                     'packing_requirements' => $bottling_details[$i]['packing_requirements'],
                     'cartoon' => $bottling_details[$i]['cartoon'] ?? null,
                 ]);
