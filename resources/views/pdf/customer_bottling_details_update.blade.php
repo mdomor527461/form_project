@@ -82,7 +82,7 @@
 
             <!-- Right Section: Customer Information -->
             <div style="display: table-cell; width: 75%; vertical-align: top; padding: 10px; border: 1px solid black;">
-                <h5>Customer Information</h5>
+                <h5>Customer Information (Updated)</h5>
                 <table style="width: 100%; border-collapse: collapse;" class="bottling-details-table">
                     <tr>
                         <th style="border: 1px solid black; padding: 5px; text-align: left;">Winery Name:</th>
@@ -114,7 +114,7 @@
 
 
         {{-- <h6>Table {{ $chunkIndex + 1 }}</h6> --}}
-        <h5 style="margin-top:10px;">Bottling Details</h5>
+        <h5 style="margin-top:10px;">Bottling Details (Updated)</h5>
         <table class="bottling-details-table">
             <!-- Initialize wine counter -->
 
@@ -337,14 +337,14 @@
                 @endfor
             </tr>
              <tr>
-                @php
+                {{-- @php
                 if($detail->sample_bottle == 1){
                     $sample = 'Yes';
                 }
                 else if($detail->sample_bottle == 0){
                     $sample = 'No';;
                 }
-                @endphp
+                @endphp --}}
                 <td>Sample Available</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $sample ?? '...' }}</td>
@@ -384,7 +384,7 @@
             <tr>
                 <td>Bottles (office use only)</td>
                 @foreach ($bottlingChunk as $detail)
-                    @php
+                    {{-- @php
                         if ($detail->bottle_size == '750ml') {
                             $bottles = round(($detail->volume * 1000) / 750); // 750ml বোতলের জন্য
                         } elseif ($detail->bottle_size == '375ml') {
@@ -392,7 +392,7 @@
                         } else {
                             $bottles = round(($detail->volume * 1000) / (int) $detail->bottle_size); // অন্য সাইজের বোতলের জন্য
                         }
-                    @endphp
+                    @endphp --}}
                     <td>{{ $bottles ?? '...' }}</td>
                 @endforeach
                 @for ($i = $bottlingChunk->count(); $i < 5; $i++)
