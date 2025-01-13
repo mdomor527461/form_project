@@ -339,7 +339,7 @@
                                     </div>
                                      <div class="col-md-4">
                                          <label for="bottling_details[${wineCounter}][label_height]" class="form-label">Label Height (in milimeters) </label>
-                                        <input type="text" name="bottling_details[${wineCounter}][label_height]" class="form-control" placeholder="Bottom of bottle to bottom of label">
+                                        <input type="number" name="bottling_details[${wineCounter}][label_height]" class="form-control" placeholder="Bottom of bottle to bottom of label">
                                     </div>
                                 </div>
 
@@ -634,7 +634,7 @@
                                     </div>
                                      <div class="col-md-4">
                                          <label for="bottling_details[${wineCounter}][label_height]" class="form-label">Label Height (in milimeters)</label>
-                                        <input type="text" name="bottling_details[${wineCounter}][label_height]" class="form-control" placeholder="Bottom of bottle to bottom of label">
+                                        <input type="number" name="bottling_details[${wineCounter}][label_height]" class="form-control" placeholder="Bottom of bottle to bottom of label">
                                     </div>
                                 </div>
 

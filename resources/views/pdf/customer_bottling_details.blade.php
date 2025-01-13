@@ -30,7 +30,8 @@
 
         th {
             background-color: white;
-            color: #00aaff;
+            color: blue;
+
         }
 
         h1,
@@ -52,8 +53,8 @@
         /* Smaller font for tables */
         .bottling-details-table th,
         .bottling-details-table td {
-            font-size: 9px;
-            line-height: 0.5;
+            font-size: 16px;
+            line-height: 1;
         }
     </style>
 </head>
@@ -73,38 +74,37 @@
 
             <!-- Left Section: MWP Content -->
             <div
-                style="display: table-cell; width: 25%; vertical-align: center; border: 1px solid black; padding: 10px; text-align: center;">
-                {{-- <h1 style="color: red; margin: 0;font-size:60px;">M<span style="color:#00aaff;">WP</span></h1>
+                style="display: table-cell; width: 25%; vertical-align: bottom; padding: 10px;padding-bottom:15px; text-align: center;">
+                {{-- <h1 style="color: red; margin: 0;font-size:60px;">M<span style="color:blue;">WP</span></h1>
                 <p style="margin: 5px 0; font-size: 14px;">Mobile Wine Processing</p>
                 <p style="margin: 0; font-size: 12px; font-style: italic;">The Estate Bottling Specialists</p> --}}
                 <img src="{{public_path('img/logo/MWP_Logo-1536x759.jpg')}}" alt="" style="width:200px;">
             </div>
 
             <!-- Right Section: Customer Information -->
-            <div style="display: table-cell; width: 75%; vertical-align: top; padding: 10px; border: 1px solid black;">
-                <h5>Customer Information</h5>
+            <div style="display: table-cell; width: 75%; vertical-align: top; padding: 10px;margin-right:-30px">
                 <table style="width: 100%; border-collapse: collapse;" class="bottling-details-table">
                     <tr>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Winery Name:</th>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;color:black; font-weight: 400;">Winery Name:</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->winery ?? "..." }}</td>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Bottling Date:</th>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;color:black; font-weight: 400;">Bottling Date:</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->bottling_date ?? "..." }}</td>
                     </tr>
                     <tr>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Bottling Address:</th>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;color:black; font-weight: 400;">Bottling Address:</th>
                         <td style="border: 1px solid black; padding: 5px;" colspan="3">{{ $customer->bottling_address ?? "..." }}</td>
                     </tr>
                     <tr>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Contact Name:</th>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;color:black; font-weight: 400;">Contact Name:</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->contact_person ?? "..." }}</td>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Phone:</th>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;color:black; font-weight: 400;">Phone:</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->contact_phone ?? "..." }}</td>
 
                     </tr>
                     <tr>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Email:</th>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;color:black; font-weight: 400;">Email:</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->email ?? "..." }}</td>
-                        <th style="border: 1px solid black; padding: 5px; text-align: left;">Power Supply</th>
+                        <th style="border: 1px solid black; padding: 5px; text-align: left;color:black; font-weight: 400;">Power Supply</th>
                         <td style="border: 1px solid black; padding: 5px;">{{ $customer->power ?? "..." }}</td>
                     </tr>
                 </table>
@@ -114,18 +114,17 @@
 
 
         {{-- <h6>Table {{ $chunkIndex + 1 }}</h6> --}}
-        <h5 style="margin-top:10px;">Bottling Details</h5>
-        <table class="bottling-details-table">
+        <table class="bottling-details-table" style="width: 100%; table-layout: fixed; border-collapse: collapse;">
             <!-- Initialize wine counter -->
 
             <tr>
-                <th style="text-align: left;">WINE</th>
+                <th style="text-align: left; width: 20%;">WINE</th>
                 @for ($i = 0; $i < 5; $i++)
-                    <th>Wine #{{ $wineNumber++ }}</th>
+                    <th style="width: 16%;">Wine #{{ $wineNumber++ }}</th>
                 @endfor
             </tr>
             <tr>
-                <td>Service <span class="required">*</span></td>
+                <td>Service</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->service ?? '...' }}</td>
                 @endforeach
@@ -162,7 +161,7 @@
                 @endfor
             </tr>
             <tr>
-                <td>Volume</td>
+                <td>Volume (Litres)</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->volume ?? '...' }}</td>
                 @endforeach
@@ -171,7 +170,7 @@
                 @endfor
             </tr>
             <tr>
-                <td>Tank</td>
+                <td>Tank/Vessel</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->tank ?? '...' }}</td>
                 @endforeach
@@ -179,8 +178,8 @@
                 <td></td>
                 @endfor
             </tr>
-            <tr>
-                <td style="color:#00aaff">FILTRATION</td>
+            <tr style="background-color: rgb(239, 225, 225)">
+                <td style="color:blue">FILTRATION</td>
                 @foreach ($bottlingChunk as $detail)
                     <td></td>
                 @endforeach
@@ -216,8 +215,8 @@
                 @endfor
             </tr>
 
-            <tr>
-                <td style="color:#00aaff">BOTTLE</td>
+            <tr style="background-color: rgb(239, 225, 225)">
+                <td style="color:blue">BOTTLE</td>
                 @foreach ($bottlingChunk as $detail)
                     <td></td>
                 @endforeach
@@ -261,8 +260,8 @@
                 <td></td>
                 @endfor
             </tr>
-            <tr>
-                <td style="color:#00aaff">CLOSURE</td>
+            <tr style="background-color: rgb(239, 225, 225)">
+                <td style="color:blue">CLOSURE</td>
                 @foreach ($bottlingChunk as $detail)
                     <td></td>
                 @endforeach
@@ -307,8 +306,8 @@
                 @endfor
             </tr>
 
-            <tr>
-                <td style="color:#00aaff">LABALING</td>
+            <tr style="background-color: rgb(239, 225, 225)">
+                <td style="color:blue">LABALING</td>
                 @foreach ($bottlingChunk as $detail)
                     <td></td>
                 @endforeach
@@ -338,14 +337,14 @@
             </tr>
              <tr>
                 @php
-                if($detail->sample_bottle == 1){
+                if($detail->sample_bottle == 1 || $detail->sample_bottle == 'yes' || $detail->sample_bottle == 'Yes'){
                     $sample = 'Yes';
                 }
-                else if($detail->sample_bottle == 0){
+                else if($detail->sample_bottle == 0 || $detail->sample_bottle == 'no' || $detail->sample_bottle == 'No'){
                     $sample = 'No';;
                 }
                 @endphp
-                <td>Sample Available</td>
+                <td>Sample Available ? </td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $sample ?? '...' }}</td>
                 @endforeach
@@ -354,8 +353,8 @@
                 @endfor
             </tr>
 
-            <tr>
-                <td style="color:#00aaff">PACKAGING</td>
+            <tr style="background-color: rgb(239, 225, 225)">
+                <td style="color:blue">PACKAGING</td>
                 @foreach ($bottlingChunk as $detail)
                     <td></td>
                 @endforeach
@@ -364,7 +363,7 @@
                 @endfor
             </tr>
             <tr>
-                <td>Packing Requirements</td>
+                <td>Type</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->packing_requirements ?? '...' }}</td>
                 @endforeach
@@ -373,7 +372,7 @@
                 @endfor
             </tr>
             <tr>
-                <td>Carton Message</td>
+                <td>Message</td>
                 @foreach ($bottlingChunk as $detail)
                     <td>{{ $detail->cartoon ?? '...' }}</td>
                 @endforeach

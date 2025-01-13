@@ -151,27 +151,30 @@ class FormController extends Controller
 
         // Retrieve saved bottling details for the customer
         // Generate the PDF and save it in public storage
+        // Generate the PDF and save it in public storage
         $bottlingDetails = BottlingDetails::where('customer_id', $customer->id)->get();
+
         $pdf = Pdf::loadView('pdf.customer_bottling_details', [
             'customer' => $customer,
             'bottling_details' => $bottlingDetails,
         ])->setPaper('a4', 'landscape');
 
-        $pdfDirectory = public_path('pdfs');
-        if (!file_exists($pdfDirectory)) {
-            mkdir($pdfDirectory, 0755, true);
-        }
+        // Get the PDF content directly
+        $pdfContent = $pdf->output();
 
-        $pdfPath = $pdfDirectory . '/customer_bottling_details_' . $customer->id . '.pdf';
-        file_put_contents($pdfPath, $pdf->output());
+        // Generate the review link
+        $reviewLink = route('form.review', ['customer' => $customer->id]);
 
-        // Send email with the PDF attachment
-        Mail::to($customer->email)
-            ->cc('sales@mwp.com.au')
-            ->send(new CustomerDetailsMail($customer, $pdfPath));
+        // Send email to the winemaker
+        Mail::to($customer->email)->send(new CustomerDetailsMail($customer, $pdfContent, 'winemaker', $reviewLink));
 
-        // Redirect to the review page with the PDF path
-        return redirect()->route('form.review', ['customer' => $customer->id, 'pdfPath' => $pdfPath]);
+        // Send email to sales@mwp.com.au
+        Mail::to('sales@mwp.com.au')->send(new CustomerDetailsMail($customer, $pdfContent, 'sales', $reviewLink));
+
+        // Return the PDF for download
+        return response()->streamDownload(function () use ($pdfContent) {
+            echo $pdfContent;
+        }, 'customer_bottling_details.pdf');
     }
 
     public function review($customerId, Request $request)
@@ -209,20 +212,22 @@ class FormController extends Controller
         });
 
         // Generate the updated PDF
-        $pdf = Pdf::loadView('pdf.customer_bottling_details_update', [
-            'customer' => $customer, // Pass the customer as an object
-            'bottling_details' => $bottlingDetails, // Pass the bottling details as a collection of objects
+        $pdf = Pdf::loadView('pdf.customer_bottling_details', [
+            'customer' => $customer,
+            'bottling_details' => $bottlingDetails,
         ])->setPaper('a4', 'landscape');
 
-        $pdfPath = 'pdfs/customer_bottling_details_' . $customerId . '_updated.pdf';
-        Storage::disk('public')->put($pdfPath, $pdf->output());
+        // Get the PDF content directly
+        $pdfContent = $pdf->output();
+        // Send email to the winemaker
+        Mail::to($customer->email)->send(new CustomerDetailsMail($customer, $pdfContent, 'winemaker'));
 
-        // Send the updated PDF via email
-        Mail::to($validatedData['email'])
-            ->cc('sales@mwp.com.au')
-            ->send(new CustomerDetailsMail($customer, Storage::disk('public')->get($pdfPath)));
+        // Send email to sales@mwp.com.au
+        Mail::to('sales@mwp.com.au')->send(new CustomerDetailsMail($customer, $pdfContent, 'sales'));
 
-        // Return the updated PDF for download
-        return $pdf->download('customer_bottling_details_updated.pdf');
+        // Return the PDF for download
+        return response()->streamDownload(function () use ($pdfContent) {
+            echo $pdfContent;
+        }, 'customer_bottling_details.pdf');
     }
 }
